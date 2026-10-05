@@ -1,0 +1,607 @@
+{
+  "clean_corpus": {},
+  "attack_corpus": {
+    "poisoned1": [
+      "not_enrolled"
+    ],
+    "poisoned3": [
+      "not_enrolled"
+    ],
+    "poisoned5": [
+      "not_enrolled"
+    ],
+    "poisoned13": [
+      "not_enrolled"
+    ],
+    "poisoned36": [
+      "not_enrolled"
+    ],
+    "poisoned42": [
+      "not_enrolled"
+    ],
+    "poisoned48": [
+      "not_enrolled"
+    ],
+    "poisoned49": [
+      "not_enrolled"
+    ],
+    "poisoned50": [
+      "not_enrolled"
+    ],
+    "poisoned51": [
+      "not_enrolled"
+    ],
+    "poisoned53": [
+      "not_enrolled"
+    ],
+    "poisoned54": [
+      "not_enrolled"
+    ],
+    "poisoned56": [
+      "not_enrolled"
+    ],
+    "poisoned57": [
+      "not_enrolled"
+    ],
+    "poisoned70": [
+      "not_enrolled"
+    ],
+    "poisoned72": [
+      "not_enrolled"
+    ],
+    "poisoned75": [
+      "not_enrolled"
+    ],
+    "poisoned94": [
+      "not_enrolled"
+    ],
+    "poisoned99": [
+      "not_enrolled"
+    ],
+    "poisoned100": [
+      "not_enrolled"
+    ],
+    "poisoned113": [
+      "not_enrolled"
+    ],
+    "poisoned115": [
+      "not_enrolled"
+    ],
+    "poisoned118": [
+      "not_enrolled"
+    ],
+    "poisoned124": [
+      "not_enrolled"
+    ],
+    "poisoned127": [
+      "not_enrolled"
+    ],
+    "poisoned128": [
+      "not_enrolled"
+    ],
+    "poisoned129": [
+      "not_enrolled"
+    ],
+    "poisoned130": [
+      "not_enrolled"
+    ],
+    "poisoned132": [
+      "not_enrolled"
+    ],
+    "poisoned133": [
+      "not_enrolled"
+    ],
+    "poisoned137": [
+      "not_enrolled"
+    ],
+    "poisoned141": [
+      "not_enrolled"
+    ],
+    "poisoned142": [
+      "not_enrolled"
+    ],
+    "poisoned143": [
+      "not_enrolled"
+    ],
+    "poisoned146": [
+      "not_enrolled"
+    ],
+    "poisoned148": [
+      "not_enrolled"
+    ],
+    "poisoned163": [
+      "not_enrolled"
+    ],
+    "poisoned171": [
+      "not_enrolled"
+    ],
+    "poisoned179": [
+      "not_enrolled"
+    ],
+    "poisoned180": [
+      "not_enrolled"
+    ],
+    "poisoned183": [
+      "not_enrolled"
+    ],
+    "poisoned185": [
+      "not_enrolled"
+    ],
+    "poisoned198": [
+      "not_enrolled"
+    ],
+    "poisoned208": [
+      "not_enrolled"
+    ],
+    "poisoned212": [
+      "not_enrolled"
+    ],
+    "poisoned213": [
+      "not_enrolled"
+    ],
+    "poisoned216": [
+      "not_enrolled"
+    ],
+    "poisoned217": [
+      "not_enrolled"
+    ],
+    "poisoned218": [
+      "not_enrolled"
+    ],
+    "poisoned219": [
+      "not_enrolled"
+    ],
+    "poisoned230": [
+      "not_enrolled"
+    ],
+    "poisoned232": [
+      "not_enrolled"
+    ],
+    "poisoned233": [
+      "not_enrolled"
+    ],
+    "poisoned236": [
+      "not_enrolled"
+    ],
+    "poisoned237": [
+      "not_enrolled"
+    ],
+    "poisoned238": [
+      "not_enrolled"
+    ],
+    "poisoned239": [
+      "not_enrolled"
+    ],
+    "poisoned248": [
+      "not_enrolled"
+    ],
+    "poisoned249": [
+      "not_enrolled"
+    ],
+    "poisoned261": [
+      "not_enrolled"
+    ],
+    "poisoned268": [
+      "not_enrolled"
+    ],
+    "poisoned269": [
+      "not_enrolled"
+    ],
+    "poisoned274": [
+      "not_enrolled"
+    ],
+    "poisoned275": [
+      "not_enrolled"
+    ],
+    "poisoned279": [
+      "not_enrolled"
+    ],
+    "poisoned294": [
+      "not_enrolled"
+    ],
+    "poisoned295": [
+      "not_enrolled"
+    ],
+    "poisoned298": [
+      "not_enrolled"
+    ],
+    "poisoned300": [
+      "not_enrolled"
+    ],
+    "poisoned303": [
+      "not_enrolled"
+    ],
+    "poisoned312": [
+      "not_enrolled"
+    ],
+    "poisoned314": [
+      "not_enrolled"
+    ],
+    "poisoned324": [
+      "not_enrolled"
+    ],
+    "poisoned327": [
+      "not_enrolled"
+    ],
+    "poisoned338": [
+      "not_enrolled"
+    ],
+    "poisoned343": [
+      "not_enrolled"
+    ],
+    "poisoned350": [
+      "not_enrolled"
+    ],
+    "poisoned354": [
+      "not_enrolled"
+    ],
+    "poisoned362": [
+      "not_enrolled"
+    ],
+    "poisoned380": [
+      "not_enrolled"
+    ],
+    "poisoned384": [
+      "not_enrolled"
+    ],
+    "poisoned385": [
+      "not_enrolled"
+    ],
+    "poisoned386": [
+      "not_enrolled"
+    ],
+    "poisoned388": [
+      "not_enrolled"
+    ],
+    "poisoned399": [
+      "not_enrolled"
+    ],
+    "poisoned410": [
+      "not_enrolled"
+    ],
+    "poisoned411": [
+      "not_enrolled"
+    ],
+    "poisoned415": [
+      "not_enrolled"
+    ],
+    "poisoned421": [
+      "not_enrolled"
+    ],
+    "poisoned431": [
+      "not_enrolled"
+    ],
+    "poisoned436": [
+      "not_enrolled"
+    ],
+    "poisoned437": [
+      "not_enrolled"
+    ],
+    "poisoned439": [
+      "not_enrolled"
+    ],
+    "poisoned440": [
+      "not_enrolled"
+    ],
+    "poisoned443": [
+      "not_enrolled"
+    ],
+    "poisoned452": [
+      "not_enrolled"
+    ],
+    "poisoned475": [
+      "not_enrolled"
+    ],
+    "poisoned478": [
+      "not_enrolled"
+    ],
+    "poisoned491": [
+      "not_enrolled"
+    ],
+    "poisoned501": [
+      "not_enrolled"
+    ]
+  },
+  "retrieved_pool": {
+    "poisoned1": [
+      "not_enrolled"
+    ],
+    "poisoned3": [
+      "not_enrolled"
+    ],
+    "poisoned5": [
+      "not_enrolled"
+    ],
+    "poisoned13": [
+      "not_enrolled"
+    ],
+    "poisoned36": [
+      "not_enrolled"
+    ],
+    "poisoned42": [
+      "not_enrolled"
+    ],
+    "poisoned48": [
+      "not_enrolled"
+    ],
+    "poisoned49": [
+      "not_enrolled"
+    ],
+    "poisoned50": [
+      "not_enrolled"
+    ],
+    "poisoned51": [
+      "not_enrolled"
+    ],
+    "poisoned53": [
+      "not_enrolled"
+    ],
+    "poisoned54": [
+      "not_enrolled"
+    ],
+    "poisoned56": [
+      "not_enrolled"
+    ],
+    "poisoned57": [
+      "not_enrolled"
+    ],
+    "poisoned70": [
+      "not_enrolled"
+    ],
+    "poisoned72": [
+      "not_enrolled"
+    ],
+    "poisoned75": [
+      "not_enrolled"
+    ],
+    "poisoned94": [
+      "not_enrolled"
+    ],
+    "poisoned99": [
+      "not_enrolled"
+    ],
+    "poisoned100": [
+      "not_enrolled"
+    ],
+    "poisoned113": [
+      "not_enrolled"
+    ],
+    "poisoned115": [
+      "not_enrolled"
+    ],
+    "poisoned118": [
+      "not_enrolled"
+    ],
+    "poisoned124": [
+      "not_enrolled"
+    ],
+    "poisoned127": [
+      "not_enrolled"
+    ],
+    "poisoned128": [
+      "not_enrolled"
+    ],
+    "poisoned129": [
+      "not_enrolled"
+    ],
+    "poisoned130": [
+      "not_enrolled"
+    ],
+    "poisoned132": [
+      "not_enrolled"
+    ],
+    "poisoned133": [
+      "not_enrolled"
+    ],
+    "poisoned137": [
+      "not_enrolled"
+    ],
+    "poisoned141": [
+      "not_enrolled"
+    ],
+    "poisoned142": [
+      "not_enrolled"
+    ],
+    "poisoned143": [
+      "not_enrolled"
+    ],
+    "poisoned146": [
+      "not_enrolled"
+    ],
+    "poisoned148": [
+      "not_enrolled"
+    ],
+    "poisoned163": [
+      "not_enrolled"
+    ],
+    "poisoned171": [
+      "not_enrolled"
+    ],
+    "poisoned179": [
+      "not_enrolled"
+    ],
+    "poisoned180": [
+      "not_enrolled"
+    ],
+    "poisoned183": [
+      "not_enrolled"
+    ],
+    "poisoned185": [
+      "not_enrolled"
+    ],
+    "poisoned198": [
+      "not_enrolled"
+    ],
+    "poisoned208": [
+      "not_enrolled"
+    ],
+    "poisoned212": [
+      "not_enrolled"
+    ],
+    "poisoned213": [
+      "not_enrolled"
+    ],
+    "poisoned216": [
+      "not_enrolled"
+    ],
+    "poisoned217": [
+      "not_enrolled"
+    ],
+    "poisoned218": [
+      "not_enrolled"
+    ],
+    "poisoned219": [
+      "not_enrolled"
+    ],
+    "poisoned230": [
+      "not_enrolled"
+    ],
+    "poisoned232": [
+      "not_enrolled"
+    ],
+    "poisoned233": [
+      "not_enrolled"
+    ],
+    "poisoned236": [
+      "not_enrolled"
+    ],
+    "poisoned237": [
+      "not_enrolled"
+    ],
+    "poisoned238": [
+      "not_enrolled"
+    ],
+    "poisoned239": [
+      "not_enrolled"
+    ],
+    "poisoned248": [
+      "not_enrolled"
+    ],
+    "poisoned249": [
+      "not_enrolled"
+    ],
+    "poisoned261": [
+      "not_enrolled"
+    ],
+    "poisoned268": [
+      "not_enrolled"
+    ],
+    "poisoned269": [
+      "not_enrolled"
+    ],
+    "poisoned274": [
+      "not_enrolled"
+    ],
+    "poisoned275": [
+      "not_enrolled"
+    ],
+    "poisoned279": [
+      "not_enrolled"
+    ],
+    "poisoned294": [
+      "not_enrolled"
+    ],
+    "poisoned295": [
+      "not_enrolled"
+    ],
+    "poisoned298": [
+      "not_enrolled"
+    ],
+    "poisoned300": [
+      "not_enrolled"
+    ],
+    "poisoned303": [
+      "not_enrolled"
+    ],
+    "poisoned312": [
+      "not_enrolled"
+    ],
+    "poisoned314": [
+      "not_enrolled"
+    ],
+    "poisoned324": [
+      "not_enrolled"
+    ],
+    "poisoned327": [
+      "not_enrolled"
+    ],
+    "poisoned338": [
+      "not_enrolled"
+    ],
+    "poisoned343": [
+      "not_enrolled"
+    ],
+    "poisoned350": [
+      "not_enrolled"
+    ],
+    "poisoned354": [
+      "not_enrolled"
+    ],
+    "poisoned362": [
+      "not_enrolled"
+    ],
+    "poisoned380": [
+      "not_enrolled"
+    ],
+    "poisoned384": [
+      "not_enrolled"
+    ],
+    "poisoned385": [
+      "not_enrolled"
+    ],
+    "poisoned386": [
+      "not_enrolled"
+    ],
+    "poisoned388": [
+      "not_enrolled"
+    ],
+    "poisoned399": [
+      "not_enrolled"
+    ],
+    "poisoned410": [
+      "not_enrolled"
+    ],
+    "poisoned411": [
+      "not_enrolled"
+    ],
+    "poisoned415": [
+      "not_enrolled"
+    ],
+    "poisoned421": [
+      "not_enrolled"
+    ],
+    "poisoned431": [
+      "not_enrolled"
+    ],
+    "poisoned436": [
+      "not_enrolled"
+    ],
+    "poisoned437": [
+      "not_enrolled"
+    ],
+    "poisoned439": [
+      "not_enrolled"
+    ],
+    "poisoned440": [
+      "not_enrolled"
+    ],
+    "poisoned443": [
+      "not_enrolled"
+    ],
+    "poisoned452": [
+      "not_enrolled"
+    ],
+    "poisoned475": [
+      "not_enrolled"
+    ],
+    "poisoned478": [
+      "not_enrolled"
+    ],
+    "poisoned491": [
+      "not_enrolled"
+    ],
+    "poisoned501": [
+      "not_enrolled"
+    ]
+  }
+}

@@ -1,0 +1,2871 @@
+{
+  "method": "budgeted_rrf_100",
+  "scenarios": {
+    "clean": {
+      "queries": 100,
+      "target_hits_at_k": 0,
+      "target_hit_rate_at_k": 0.0,
+      "clean_recall_at_k": 0.8523333333333334,
+      "clean_ndcg_at_k": 0.7926740399831695,
+      "per_query": {
+        "1": {
+          "target_id": "poisoned1",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "40212412",
+            "27049238",
+            "17388232",
+            "21874414",
+            "10931595"
+          ]
+        },
+        "3": {
+          "target_id": "poisoned3",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14717500",
+            "2739854",
+            "23389795",
+            "4632921",
+            "10944947"
+          ]
+        },
+        "5": {
+          "target_id": "poisoned5",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "13734012",
+            "18617259",
+            "17333231",
+            "23124332",
+            "42240424"
+          ]
+        },
+        "13": {
+          "target_id": "poisoned13",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "7662395",
+            "1263446",
+            "17450673",
+            "12779444",
+            "26611834"
+          ]
+        },
+        "36": {
+          "target_id": "poisoned36",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.5,
+          "clean_ndcg_at_k": 0.23719771276929622,
+          "top_ids": [
+            "33409100",
+            "18557974",
+            "16252863",
+            "42441846",
+            "11705328"
+          ]
+        },
+        "42": {
+          "target_id": "poisoned42",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18174210",
+            "40913091",
+            "45218443",
+            "6315132",
+            "4449524"
+          ]
+        },
+        "48": {
+          "target_id": "poisoned48",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "18617259",
+            "13734012",
+            "11349166",
+            "3716075",
+            "22309946"
+          ]
+        },
+        "49": {
+          "target_id": "poisoned49",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "5953485",
+            "5702790",
+            "7029990",
+            "8006440",
+            "86602746"
+          ]
+        },
+        "50": {
+          "target_id": "poisoned50",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "12580014",
+            "18488986",
+            "25738896",
+            "39559521",
+            "4561402"
+          ]
+        },
+        "51": {
+          "target_id": "poisoned51",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "45638119",
+            "16734530",
+            "7821634",
+            "20839751",
+            "8963413"
+          ]
+        },
+        "53": {
+          "target_id": "poisoned53",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "45638119",
+            "7821634",
+            "4889228",
+            "29366489",
+            "20839751"
+          ]
+        },
+        "54": {
+          "target_id": "poisoned54",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.38685280723454163,
+          "top_ids": [
+            "3973445",
+            "9752604",
+            "9899292",
+            "1590744",
+            "49556906"
+          ]
+        },
+        "56": {
+          "target_id": "poisoned56",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4709641",
+            "11659421",
+            "4459491",
+            "22185730",
+            "10641715"
+          ]
+        },
+        "57": {
+          "target_id": "poisoned57",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4709641",
+            "11659421",
+            "4459491",
+            "22185730",
+            "35520219"
+          ]
+        },
+        "70": {
+          "target_id": "poisoned70",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "5956380",
+            "4414547",
+            "5254463",
+            "21307488",
+            "43880096"
+          ]
+        },
+        "72": {
+          "target_id": "poisoned72",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "6076903",
+            "1744752",
+            "1550937",
+            "23974474",
+            "15322518"
+          ]
+        },
+        "75": {
+          "target_id": "poisoned75",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4387784",
+            "13965483",
+            "25657127",
+            "2837758",
+            "26488879"
+          ]
+        },
+        "94": {
+          "target_id": "poisoned94",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1215116",
+            "39892135",
+            "21479231",
+            "23801039",
+            "4999387"
+          ]
+        },
+        "99": {
+          "target_id": "poisoned99",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18810195",
+            "10247314",
+            "2617858",
+            "1225513",
+            "1744752"
+          ]
+        },
+        "100": {
+          "target_id": "poisoned100",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4381486",
+            "2701077",
+            "25516011",
+            "92499",
+            "40234452"
+          ]
+        },
+        "113": {
+          "target_id": "poisoned113",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "6157837",
+            "1759213",
+            "14584755",
+            "25816994",
+            "26199970"
+          ]
+        },
+        "115": {
+          "target_id": "poisoned115",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "33872649",
+            "9977329",
+            "43054703",
+            "1234098",
+            "12824568"
+          ]
+        },
+        "118": {
+          "target_id": "poisoned118",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "6372244",
+            "4465735",
+            "32454714",
+            "13714201",
+            "4492358"
+          ]
+        },
+        "124": {
+          "target_id": "poisoned124",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4883040",
+            "7111021",
+            "13899137",
+            "21479231",
+            "31363207"
+          ]
+        },
+        "127": {
+          "target_id": "poisoned127",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21598000",
+            "35231675",
+            "7878807",
+            "17768946",
+            "29788648"
+          ]
+        },
+        "128": {
+          "target_id": "poisoned128",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "1122279",
+            "79447",
+            "23513718",
+            "4890578",
+            "25175997"
+          ]
+        },
+        "129": {
+          "target_id": "poisoned129",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "27768226",
+            "4688277",
+            "6477536",
+            "4857085",
+            "2107238"
+          ]
+        },
+        "130": {
+          "target_id": "poisoned130",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "27768226",
+            "4688277",
+            "2107238",
+            "4857085",
+            "28017005"
+          ]
+        },
+        "132": {
+          "target_id": "poisoned132",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "6945691",
+            "21181273",
+            "27615329",
+            "58006489",
+            "3866315"
+          ]
+        },
+        "133": {
+          "target_id": "poisoned133",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.4,
+          "clean_ndcg_at_k": 0.5087403079104241,
+          "top_ids": [
+            "16280642",
+            "11200685",
+            "12640810",
+            "35660758",
+            "86694016"
+          ]
+        },
+        "137": {
+          "target_id": "poisoned137",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "26016929",
+            "457630",
+            "21274919",
+            "10893238",
+            "10536636"
+          ]
+        },
+        "141": {
+          "target_id": "poisoned141",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14437255",
+            "6955746",
+            "10624000",
+            "38794814",
+            "36860856"
+          ]
+        },
+        "142": {
+          "target_id": "poisoned142",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10582939",
+            "40164383",
+            "24101431",
+            "19511011",
+            "43587663"
+          ]
+        },
+        "143": {
+          "target_id": "poisoned143",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10582939",
+            "40164383",
+            "43587663",
+            "24795767",
+            "24101431"
+          ]
+        },
+        "146": {
+          "target_id": "poisoned146",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10582939",
+            "40164383",
+            "4416964",
+            "24101431",
+            "24825841"
+          ]
+        },
+        "148": {
+          "target_id": "poisoned148",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1084345",
+            "10012166",
+            "56528795",
+            "52887689",
+            "10463997"
+          ]
+        },
+        "163": {
+          "target_id": "poisoned163",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18872233",
+            "43220289",
+            "19071857",
+            "29022271",
+            "5824985"
+          ]
+        },
+        "171": {
+          "target_id": "poisoned171",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "12670680",
+            "28015516",
+            "28149602",
+            "14938990",
+            "5448119"
+          ]
+        },
+        "179": {
+          "target_id": "poisoned179",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.5,
+          "clean_ndcg_at_k": 0.5855700749881525,
+          "top_ids": [
+            "16322674",
+            "37480103",
+            "17450673",
+            "5487448",
+            "25973484"
+          ]
+        },
+        "180": {
+          "target_id": "poisoned180",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "16966326",
+            "9217800",
+            "13380011",
+            "23052989",
+            "14893425"
+          ]
+        },
+        "183": {
+          "target_id": "poisoned183",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "10078024",
+            "46193388",
+            "12827098",
+            "188911",
+            "8137081"
+          ]
+        },
+        "185": {
+          "target_id": "poisoned185",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18340282",
+            "5864770",
+            "21874312",
+            "13831842",
+            "25973484"
+          ]
+        },
+        "198": {
+          "target_id": "poisoned198",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "2177022",
+            "29689140",
+            "6788835",
+            "26378103",
+            "42731834"
+          ]
+        },
+        "208": {
+          "target_id": "poisoned208",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "13519661",
+            "21439640",
+            "20280410",
+            "16701509",
+            "4886637"
+          ]
+        },
+        "212": {
+          "target_id": "poisoned212",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "22038539",
+            "7808055",
+            "14475235",
+            "4434951",
+            "11935250"
+          ]
+        },
+        "213": {
+          "target_id": "poisoned213",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.38685280723454163,
+          "top_ids": [
+            "27054878",
+            "20887554",
+            "9846940",
+            "750781",
+            "13625993"
+          ]
+        },
+        "216": {
+          "target_id": "poisoned216",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "22174015",
+            "28006126",
+            "21363424",
+            "13636631"
+          ]
+        },
+        "217": {
+          "target_id": "poisoned217",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "24387017",
+            "28006126",
+            "13636631",
+            "41877386"
+          ]
+        },
+        "218": {
+          "target_id": "poisoned218",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "20311968",
+            "40365566",
+            "696006",
+            "1800734"
+          ]
+        },
+        "219": {
+          "target_id": "poisoned219",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "20311968",
+            "40365566",
+            "696006",
+            "1800734"
+          ]
+        },
+        "230": {
+          "target_id": "poisoned230",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "3067015",
+            "38028419",
+            "45638119",
+            "8906858",
+            "52072815"
+          ]
+        },
+        "232": {
+          "target_id": "poisoned232",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "7655029",
+            "10536636",
+            "29090823",
+            "457630",
+            "21914176"
+          ]
+        },
+        "233": {
+          "target_id": "poisoned233",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4388470",
+            "28390999",
+            "4423327",
+            "12232678",
+            "23581096"
+          ]
+        },
+        "236": {
+          "target_id": "poisoned236",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4388470",
+            "28390999",
+            "12232678",
+            "16963081",
+            "23581096"
+          ]
+        },
+        "237": {
+          "target_id": "poisoned237",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4942718",
+            "34386619",
+            "12881593",
+            "24706198",
+            "21943141"
+          ]
+        },
+        "238": {
+          "target_id": "poisoned238",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "23017040",
+            "4463811",
+            "28704738",
+            "21601459",
+            "22038539"
+          ]
+        },
+        "239": {
+          "target_id": "poisoned239",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "7042304",
+            "615047",
+            "516867",
+            "40349336",
+            "6896063"
+          ]
+        },
+        "248": {
+          "target_id": "poisoned248",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1568684",
+            "23369842",
+            "26902591",
+            "23017040",
+            "25050364"
+          ]
+        },
+        "249": {
+          "target_id": "poisoned249",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1568684",
+            "23369842",
+            "23017040",
+            "26902591",
+            "25050364"
+          ]
+        },
+        "261": {
+          "target_id": "poisoned261",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.5,
+          "clean_ndcg_at_k": 0.23719771276929622,
+          "top_ids": [
+            "35271381",
+            "32322418",
+            "46743299",
+            "25822299",
+            "1122279"
+          ]
+        },
+        "268": {
+          "target_id": "poisoned268",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "970012",
+            "36838958",
+            "1568684",
+            "29381091",
+            "32955023"
+          ]
+        },
+        "269": {
+          "target_id": "poisoned269",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "970012",
+            "36838958",
+            "29381091",
+            "32955023",
+            "1568684"
+          ]
+        },
+        "274": {
+          "target_id": "poisoned274",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "11614737",
+            "5114940",
+            "24019260",
+            "34369306",
+            "5551138"
+          ]
+        },
+        "275": {
+          "target_id": "poisoned275",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.3333333333333333,
+          "clean_ndcg_at_k": 0.46927872602275644,
+          "top_ids": [
+            "4961038",
+            "4920376",
+            "85665741",
+            "1285713",
+            "24190159"
+          ]
+        },
+        "279": {
+          "target_id": "poisoned279",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14376683",
+            "83667891",
+            "37677954",
+            "9704467",
+            "14185503"
+          ]
+        },
+        "294": {
+          "target_id": "poisoned294",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10874408",
+            "16237005",
+            "35861290",
+            "9704467",
+            "4305576"
+          ]
+        },
+        "295": {
+          "target_id": "poisoned295",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "20310709",
+            "1022115",
+            "29423324",
+            "24044977",
+            "883747"
+          ]
+        },
+        "298": {
+          "target_id": "poisoned298",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "39381118",
+            "23403754",
+            "23887844",
+            "15836115",
+            "8654183"
+          ]
+        },
+        "300": {
+          "target_id": "poisoned300",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "16120395",
+            "3553087",
+            "40721190",
+            "935538",
+            "32324430"
+          ]
+        },
+        "303": {
+          "target_id": "poisoned303",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "4085204",
+            "10024681",
+            "4421547",
+            "23581096",
+            "6948886"
+          ]
+        },
+        "312": {
+          "target_id": "poisoned312",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "14464451",
+            "32770503",
+            "6173523",
+            "15966318",
+            "15478227"
+          ]
+        },
+        "314": {
+          "target_id": "poisoned314",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "544971",
+            "2638387",
+            "4347374",
+            "34498325",
+            "24896957"
+          ]
+        },
+        "324": {
+          "target_id": "poisoned324",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "2014909",
+            "24612804",
+            "22174015",
+            "19510470",
+            "24721866"
+          ]
+        },
+        "327": {
+          "target_id": "poisoned327",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "17997584",
+            "4391121",
+            "23912923",
+            "13905670",
+            "22867765"
+          ]
+        },
+        "338": {
+          "target_id": "poisoned338",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "23349986",
+            "24211561",
+            "36288526",
+            "15948830",
+            "32001951"
+          ]
+        },
+        "343": {
+          "target_id": "poisoned343",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.9197207891481876,
+          "top_ids": [
+            "5884524",
+            "23783727",
+            "7873737",
+            "38630735",
+            "19308127"
+          ]
+        },
+        "350": {
+          "target_id": "poisoned350",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "16927286",
+            "23342686",
+            "8698857",
+            "30261663",
+            "6209599"
+          ]
+        },
+        "354": {
+          "target_id": "poisoned354",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "8774475",
+            "1241113",
+            "34103335",
+            "16086778",
+            "45638119"
+          ]
+        },
+        "362": {
+          "target_id": "poisoned362",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "38587347",
+            "15488881",
+            "30208015",
+            "15058155",
+            "5003144"
+          ]
+        },
+        "380": {
+          "target_id": "poisoned380",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "19005293",
+            "27602752",
+            "10648422",
+            "3835423",
+            "219475"
+          ]
+        },
+        "384": {
+          "target_id": "poisoned384",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "51972698",
+            "40666943",
+            "25451374",
+            "581832",
+            "8582337"
+          ]
+        },
+        "385": {
+          "target_id": "poisoned385",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6509209298071326,
+          "top_ids": [
+            "1032372",
+            "9767444",
+            "12641252",
+            "9955779",
+            "2030623"
+          ]
+        },
+        "386": {
+          "target_id": "poisoned386",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "16495649",
+            "42404093",
+            "21260231",
+            "70516463",
+            "22371455"
+          ]
+        },
+        "388": {
+          "target_id": "poisoned388",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "21602220",
+            "1148122",
+            "22908536",
+            "418246",
+            "471735"
+          ]
+        },
+        "399": {
+          "target_id": "poisoned399",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "791050",
+            "471921",
+            "42387637",
+            "21003930",
+            "32357890"
+          ]
+        },
+        "410": {
+          "target_id": "poisoned410",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14924526",
+            "116792",
+            "15889329",
+            "29723642",
+            "1410197"
+          ]
+        },
+        "411": {
+          "target_id": "poisoned411",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14924526",
+            "15889329",
+            "29723642",
+            "116792",
+            "1410197"
+          ]
+        },
+        "415": {
+          "target_id": "poisoned415",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.43067655807339306,
+          "top_ids": [
+            "4709641",
+            "20937018",
+            "12443371",
+            "6309659",
+            "51386222"
+          ]
+        },
+        "421": {
+          "target_id": "poisoned421",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "4429118",
+            "4346436",
+            "2242416",
+            "36271512",
+            "10812605"
+          ]
+        },
+        "431": {
+          "target_id": "poisoned431",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "29073751",
+            "2543135",
+            "23887844",
+            "1941721",
+            "10993232"
+          ]
+        },
+        "436": {
+          "target_id": "poisoned436",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14637235",
+            "18038955",
+            "15926408",
+            "12588500",
+            "4899981"
+          ]
+        },
+        "437": {
+          "target_id": "poisoned437",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "39851630",
+            "5765455",
+            "3863543",
+            "2359152",
+            "33677323"
+          ]
+        },
+        "439": {
+          "target_id": "poisoned439",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4423559",
+            "18575183",
+            "4932668",
+            "17049436",
+            "5395426"
+          ]
+        },
+        "440": {
+          "target_id": "poisoned440",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4423559",
+            "18575183",
+            "4932668",
+            "17049436",
+            "39763465"
+          ]
+        },
+        "443": {
+          "target_id": "poisoned443",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10165258",
+            "11289247",
+            "13980338",
+            "18909530",
+            "12130067"
+          ]
+        },
+        "452": {
+          "target_id": "poisoned452",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "16237005",
+            "40254495",
+            "9154703",
+            "18333304",
+            "18264714"
+          ]
+        },
+        "475": {
+          "target_id": "poisoned475",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.43067655807339306,
+          "top_ids": [
+            "195689757",
+            "8477699",
+            "8724666",
+            "18678095",
+            "23576165"
+          ]
+        },
+        "478": {
+          "target_id": "poisoned478",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14767844",
+            "10562341",
+            "40096222",
+            "1605392",
+            "20344442"
+          ]
+        },
+        "491": {
+          "target_id": "poisoned491",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "56893404",
+            "15692098",
+            "1576955",
+            "834336",
+            "43311750"
+          ]
+        },
+        "501": {
+          "target_id": "poisoned501",
+          "target_rank_in_saved_pool": null,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "17930286",
+            "21274919",
+            "24865781",
+            "6191684",
+            "24510595"
+          ]
+        }
+      },
+      "queries_with_relevant_at_5": 88,
+      "queries_without_relevant_at_5": 12,
+      "queries_with_fewer_than_5": 0,
+      "lost_relevant_query_vs_dense": [
+        "384",
+        "452"
+      ],
+      "gained_relevant_query_vs_dense": [
+        "198",
+        "261",
+        "294",
+        "300",
+        "312",
+        "314"
+      ],
+      "incremental_cpu_timing": {
+        "samples": 100,
+        "mean_ms": 2.3164169999472506,
+        "p50_ms": 2.2502500005430193,
+        "p95_ms": 3.0431100007263012
+      }
+    },
+    "attacked": {
+      "queries": 100,
+      "target_hits_at_k": 22,
+      "target_hit_rate_at_k": 0.22,
+      "clean_recall_at_k": 0.8423333333333334,
+      "clean_ndcg_at_k": 0.7823266809647539,
+      "per_query": {
+        "1": {
+          "target_id": "poisoned1",
+          "target_rank_in_saved_pool": 50,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "40212412",
+            "27049238",
+            "17388232",
+            "21874414",
+            "10931595"
+          ]
+        },
+        "3": {
+          "target_id": "poisoned3",
+          "target_rank_in_saved_pool": 11,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14717500",
+            "2739854",
+            "23389795",
+            "4632921",
+            "10944947"
+          ]
+        },
+        "5": {
+          "target_id": "poisoned5",
+          "target_rank_in_saved_pool": 3,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "13734012",
+            "18617259",
+            "poisoned5",
+            "17333231",
+            "42240424"
+          ]
+        },
+        "13": {
+          "target_id": "poisoned13",
+          "target_rank_in_saved_pool": 4,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "7662395",
+            "1263446",
+            "17450673",
+            "poisoned13",
+            "12779444"
+          ]
+        },
+        "36": {
+          "target_id": "poisoned36",
+          "target_rank_in_saved_pool": 50,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.5,
+          "clean_ndcg_at_k": 0.23719771276929622,
+          "top_ids": [
+            "33409100",
+            "18557974",
+            "16252863",
+            "42441846",
+            "11705328"
+          ]
+        },
+        "42": {
+          "target_id": "poisoned42",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18174210",
+            "40913091",
+            "45218443",
+            "6315132",
+            "4449524"
+          ]
+        },
+        "48": {
+          "target_id": "poisoned48",
+          "target_rank_in_saved_pool": 57,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "18617259",
+            "13734012",
+            "11349166",
+            "3716075",
+            "22309946"
+          ]
+        },
+        "49": {
+          "target_id": "poisoned49",
+          "target_rank_in_saved_pool": 97,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "5953485",
+            "5702790",
+            "7029990",
+            "8006440",
+            "18467982"
+          ]
+        },
+        "50": {
+          "target_id": "poisoned50",
+          "target_rank_in_saved_pool": 14,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "12580014",
+            "18488986",
+            "25738896",
+            "39559521",
+            "4561402"
+          ]
+        },
+        "51": {
+          "target_id": "poisoned51",
+          "target_rank_in_saved_pool": 21,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "45638119",
+            "16734530",
+            "7821634",
+            "20839751",
+            "8963413"
+          ]
+        },
+        "53": {
+          "target_id": "poisoned53",
+          "target_rank_in_saved_pool": 33,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "45638119",
+            "7821634",
+            "4889228",
+            "29366489",
+            "20839751"
+          ]
+        },
+        "54": {
+          "target_id": "poisoned54",
+          "target_rank_in_saved_pool": 24,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.38685280723454163,
+          "top_ids": [
+            "3973445",
+            "9752604",
+            "9899292",
+            "1590744",
+            "49556906"
+          ]
+        },
+        "56": {
+          "target_id": "poisoned56",
+          "target_rank_in_saved_pool": 3,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4709641",
+            "11659421",
+            "poisoned56",
+            "4459491",
+            "22185730"
+          ]
+        },
+        "57": {
+          "target_id": "poisoned57",
+          "target_rank_in_saved_pool": 13,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4709641",
+            "11659421",
+            "4459491",
+            "22185730",
+            "35520219"
+          ]
+        },
+        "70": {
+          "target_id": "poisoned70",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "5956380",
+            "4414547",
+            "5254463",
+            "21307488",
+            "43880096"
+          ]
+        },
+        "72": {
+          "target_id": "poisoned72",
+          "target_rank_in_saved_pool": 95,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "6076903",
+            "1744752",
+            "1550937",
+            "23974474",
+            "15322518"
+          ]
+        },
+        "75": {
+          "target_id": "poisoned75",
+          "target_rank_in_saved_pool": 53,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4387784",
+            "13965483",
+            "25657127",
+            "2837758",
+            "26488879"
+          ]
+        },
+        "94": {
+          "target_id": "poisoned94",
+          "target_rank_in_saved_pool": 44,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1215116",
+            "39892135",
+            "21479231",
+            "23801039",
+            "4999387"
+          ]
+        },
+        "99": {
+          "target_id": "poisoned99",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18810195",
+            "10247314",
+            "2617858",
+            "1225513",
+            "1744752"
+          ]
+        },
+        "100": {
+          "target_id": "poisoned100",
+          "target_rank_in_saved_pool": 97,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4381486",
+            "2701077",
+            "25516011",
+            "92499",
+            "40234452"
+          ]
+        },
+        "113": {
+          "target_id": "poisoned113",
+          "target_rank_in_saved_pool": 48,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "6157837",
+            "1759213",
+            "14584755",
+            "25816994",
+            "26199970"
+          ]
+        },
+        "115": {
+          "target_id": "poisoned115",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "33872649",
+            "poisoned115",
+            "43054703",
+            "1234098",
+            "12824568"
+          ]
+        },
+        "118": {
+          "target_id": "poisoned118",
+          "target_rank_in_saved_pool": 4,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "6372244",
+            "4465735",
+            "32454714",
+            "poisoned118",
+            "13714201"
+          ]
+        },
+        "124": {
+          "target_id": "poisoned124",
+          "target_rank_in_saved_pool": 43,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4883040",
+            "7111021",
+            "13899137",
+            "21479231",
+            "31363207"
+          ]
+        },
+        "127": {
+          "target_id": "poisoned127",
+          "target_rank_in_saved_pool": 58,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21598000",
+            "35231675",
+            "7878807",
+            "17768946",
+            "29788648"
+          ]
+        },
+        "128": {
+          "target_id": "poisoned128",
+          "target_rank_in_saved_pool": 95,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "1122279",
+            "79447",
+            "23513718",
+            "4890578",
+            "25175997"
+          ]
+        },
+        "129": {
+          "target_id": "poisoned129",
+          "target_rank_in_saved_pool": 41,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "27768226",
+            "4688277",
+            "6477536",
+            "4857085",
+            "2107238"
+          ]
+        },
+        "130": {
+          "target_id": "poisoned130",
+          "target_rank_in_saved_pool": 13,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "27768226",
+            "4688277",
+            "2107238",
+            "4857085",
+            "28017005"
+          ]
+        },
+        "132": {
+          "target_id": "poisoned132",
+          "target_rank_in_saved_pool": 7,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "6945691",
+            "21181273",
+            "27615329",
+            "58006489",
+            "3866315"
+          ]
+        },
+        "133": {
+          "target_id": "poisoned133",
+          "target_rank_in_saved_pool": 55,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.4,
+          "clean_ndcg_at_k": 0.5087403079104241,
+          "top_ids": [
+            "16280642",
+            "11200685",
+            "12640810",
+            "35660758",
+            "86694016"
+          ]
+        },
+        "137": {
+          "target_id": "poisoned137",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "26016929",
+            "poisoned137",
+            "457630",
+            "21274919",
+            "10893238"
+          ]
+        },
+        "141": {
+          "target_id": "poisoned141",
+          "target_rank_in_saved_pool": 54,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14437255",
+            "6955746",
+            "10624000",
+            "38794814",
+            "36860856"
+          ]
+        },
+        "142": {
+          "target_id": "poisoned142",
+          "target_rank_in_saved_pool": 59,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10582939",
+            "40164383",
+            "24101431",
+            "19511011",
+            "43587663"
+          ]
+        },
+        "143": {
+          "target_id": "poisoned143",
+          "target_rank_in_saved_pool": 49,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10582939",
+            "40164383",
+            "43587663",
+            "24795767",
+            "24101431"
+          ]
+        },
+        "146": {
+          "target_id": "poisoned146",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10582939",
+            "40164383",
+            "4416964",
+            "24101431",
+            "24825841"
+          ]
+        },
+        "148": {
+          "target_id": "poisoned148",
+          "target_rank_in_saved_pool": 26,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1084345",
+            "10012166",
+            "56528795",
+            "52887689",
+            "10463997"
+          ]
+        },
+        "163": {
+          "target_id": "poisoned163",
+          "target_rank_in_saved_pool": 13,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18872233",
+            "43220289",
+            "19071857",
+            "29022271",
+            "5824985"
+          ]
+        },
+        "171": {
+          "target_id": "poisoned171",
+          "target_rank_in_saved_pool": 99,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "12670680",
+            "28015516",
+            "28149602",
+            "14938990",
+            "5448119"
+          ]
+        },
+        "179": {
+          "target_id": "poisoned179",
+          "target_rank_in_saved_pool": 5,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 0.5,
+          "clean_ndcg_at_k": 0.5855700749881525,
+          "top_ids": [
+            "16322674",
+            "37480103",
+            "17450673",
+            "5487448",
+            "poisoned179"
+          ]
+        },
+        "180": {
+          "target_id": "poisoned180",
+          "target_rank_in_saved_pool": 59,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "16966326",
+            "9217800",
+            "13380011",
+            "23052989",
+            "14893425"
+          ]
+        },
+        "183": {
+          "target_id": "poisoned183",
+          "target_rank_in_saved_pool": 16,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "10078024",
+            "46193388",
+            "12827098",
+            "188911",
+            "8137081"
+          ]
+        },
+        "185": {
+          "target_id": "poisoned185",
+          "target_rank_in_saved_pool": 3,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "18340282",
+            "5864770",
+            "poisoned185",
+            "21874312",
+            "13831842"
+          ]
+        },
+        "198": {
+          "target_id": "poisoned198",
+          "target_rank_in_saved_pool": 1,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "poisoned198",
+            "2177022",
+            "29689140",
+            "6788835",
+            "26378103"
+          ]
+        },
+        "208": {
+          "target_id": "poisoned208",
+          "target_rank_in_saved_pool": 13,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "13519661",
+            "21439640",
+            "20280410",
+            "16701509",
+            "4886637"
+          ]
+        },
+        "212": {
+          "target_id": "poisoned212",
+          "target_rank_in_saved_pool": 33,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "22038539",
+            "7808055",
+            "14475235",
+            "4434951",
+            "11935250"
+          ]
+        },
+        "213": {
+          "target_id": "poisoned213",
+          "target_rank_in_saved_pool": 10,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.38685280723454163,
+          "top_ids": [
+            "27054878",
+            "20887554",
+            "9846940",
+            "750781",
+            "13625993"
+          ]
+        },
+        "216": {
+          "target_id": "poisoned216",
+          "target_rank_in_saved_pool": 57,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "22174015",
+            "28006126",
+            "21363424",
+            "13636631"
+          ]
+        },
+        "217": {
+          "target_id": "poisoned217",
+          "target_rank_in_saved_pool": 59,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "24387017",
+            "28006126",
+            "13636631",
+            "41877386"
+          ]
+        },
+        "218": {
+          "target_id": "poisoned218",
+          "target_rank_in_saved_pool": 27,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "20311968",
+            "40365566",
+            "696006",
+            "1800734"
+          ]
+        },
+        "219": {
+          "target_id": "poisoned219",
+          "target_rank_in_saved_pool": 26,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "21366394",
+            "20311968",
+            "40365566",
+            "696006",
+            "888896"
+          ]
+        },
+        "230": {
+          "target_id": "poisoned230",
+          "target_rank_in_saved_pool": 48,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "3067015",
+            "38028419",
+            "45638119",
+            "8906858",
+            "52072815"
+          ]
+        },
+        "232": {
+          "target_id": "poisoned232",
+          "target_rank_in_saved_pool": 7,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6309297535714575,
+          "top_ids": [
+            "7655029",
+            "10536636",
+            "29090823",
+            "457630",
+            "21914176"
+          ]
+        },
+        "233": {
+          "target_id": "poisoned233",
+          "target_rank_in_saved_pool": 47,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4388470",
+            "28390999",
+            "4423327",
+            "12232678",
+            "23581096"
+          ]
+        },
+        "236": {
+          "target_id": "poisoned236",
+          "target_rank_in_saved_pool": 41,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4388470",
+            "28390999",
+            "12232678",
+            "16963081",
+            "23581096"
+          ]
+        },
+        "237": {
+          "target_id": "poisoned237",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4942718",
+            "34386619",
+            "12881593",
+            "24706198",
+            "21943141"
+          ]
+        },
+        "238": {
+          "target_id": "poisoned238",
+          "target_rank_in_saved_pool": 34,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "23017040",
+            "4463811",
+            "28704738",
+            "21601459",
+            "22038539"
+          ]
+        },
+        "239": {
+          "target_id": "poisoned239",
+          "target_rank_in_saved_pool": 7,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "7042304",
+            "615047",
+            "516867",
+            "40349336",
+            "6896063"
+          ]
+        },
+        "248": {
+          "target_id": "poisoned248",
+          "target_rank_in_saved_pool": 80,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1568684",
+            "23369842",
+            "26902591",
+            "23017040",
+            "25050364"
+          ]
+        },
+        "249": {
+          "target_id": "poisoned249",
+          "target_rank_in_saved_pool": 9,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "1568684",
+            "23369842",
+            "23017040",
+            "26902591",
+            "25050364"
+          ]
+        },
+        "261": {
+          "target_id": "poisoned261",
+          "target_rank_in_saved_pool": 40,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.5,
+          "clean_ndcg_at_k": 0.2640681225725909,
+          "top_ids": [
+            "35271381",
+            "32322418",
+            "46743299",
+            "1122279",
+            "25822299"
+          ]
+        },
+        "268": {
+          "target_id": "poisoned268",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "970012",
+            "poisoned268",
+            "36838958",
+            "1568684",
+            "29381091"
+          ]
+        },
+        "269": {
+          "target_id": "poisoned269",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "970012",
+            "poisoned269",
+            "36838958",
+            "29381091",
+            "32955023"
+          ]
+        },
+        "274": {
+          "target_id": "poisoned274",
+          "target_rank_in_saved_pool": 6,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "11614737",
+            "5114940",
+            "24019260",
+            "34369306",
+            "5551138"
+          ]
+        },
+        "275": {
+          "target_id": "poisoned275",
+          "target_rank_in_saved_pool": 24,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.3333333333333333,
+          "clean_ndcg_at_k": 0.46927872602275644,
+          "top_ids": [
+            "4961038",
+            "4920376",
+            "85665741",
+            "1285713",
+            "24190159"
+          ]
+        },
+        "279": {
+          "target_id": "poisoned279",
+          "target_rank_in_saved_pool": 4,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14376683",
+            "83667891",
+            "37677954",
+            "poisoned279",
+            "9704467"
+          ]
+        },
+        "294": {
+          "target_id": "poisoned294",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10874408",
+            "poisoned294",
+            "16237005",
+            "35861290",
+            "9704467"
+          ]
+        },
+        "295": {
+          "target_id": "poisoned295",
+          "target_rank_in_saved_pool": 50,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "20310709",
+            "1022115",
+            "29423324",
+            "24044977",
+            "883747"
+          ]
+        },
+        "298": {
+          "target_id": "poisoned298",
+          "target_rank_in_saved_pool": 37,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "39381118",
+            "23403754",
+            "23887844",
+            "15836115",
+            "8654183"
+          ]
+        },
+        "300": {
+          "target_id": "poisoned300",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "16120395",
+            "poisoned300",
+            "3553087",
+            "40721190",
+            "935538"
+          ]
+        },
+        "303": {
+          "target_id": "poisoned303",
+          "target_rank_in_saved_pool": 57,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "4085204",
+            "10024681",
+            "4421547",
+            "23581096",
+            "6948886"
+          ]
+        },
+        "312": {
+          "target_id": "poisoned312",
+          "target_rank_in_saved_pool": 26,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "14464451",
+            "32770503",
+            "6173523",
+            "15966318",
+            "15478227"
+          ]
+        },
+        "314": {
+          "target_id": "poisoned314",
+          "target_rank_in_saved_pool": 56,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "544971",
+            "2638387",
+            "4347374",
+            "34498325",
+            "24896957"
+          ]
+        },
+        "324": {
+          "target_id": "poisoned324",
+          "target_rank_in_saved_pool": 32,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "2014909",
+            "24612804",
+            "22174015",
+            "19510470",
+            "24721866"
+          ]
+        },
+        "327": {
+          "target_id": "poisoned327",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "17997584",
+            "4391121",
+            "23912923",
+            "13905670",
+            "22867765"
+          ]
+        },
+        "338": {
+          "target_id": "poisoned338",
+          "target_rank_in_saved_pool": 5,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "23349986",
+            "24211561",
+            "36288526",
+            "15948830",
+            "poisoned338"
+          ]
+        },
+        "343": {
+          "target_id": "poisoned343",
+          "target_rank_in_saved_pool": 9,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.9197207891481876,
+          "top_ids": [
+            "5884524",
+            "23783727",
+            "7873737",
+            "38630735",
+            "19308127"
+          ]
+        },
+        "350": {
+          "target_id": "poisoned350",
+          "target_rank_in_saved_pool": 60,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "16927286",
+            "23342686",
+            "8698857",
+            "30261663",
+            "6209599"
+          ]
+        },
+        "354": {
+          "target_id": "poisoned354",
+          "target_rank_in_saved_pool": 17,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "8774475",
+            "34103335",
+            "1241113",
+            "16086778",
+            "45638119"
+          ]
+        },
+        "362": {
+          "target_id": "poisoned362",
+          "target_rank_in_saved_pool": 61,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "38587347",
+            "15488881",
+            "30208015",
+            "15058155",
+            "5003144"
+          ]
+        },
+        "380": {
+          "target_id": "poisoned380",
+          "target_rank_in_saved_pool": 10,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "19005293",
+            "27602752",
+            "10648422",
+            "3835423",
+            "219475"
+          ]
+        },
+        "384": {
+          "target_id": "poisoned384",
+          "target_rank_in_saved_pool": 44,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "51972698",
+            "40666943",
+            "25451374",
+            "581832",
+            "8582337"
+          ]
+        },
+        "385": {
+          "target_id": "poisoned385",
+          "target_rank_in_saved_pool": 61,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.6509209298071326,
+          "top_ids": [
+            "1032372",
+            "9767444",
+            "12641252",
+            "9955779",
+            "2030623"
+          ]
+        },
+        "386": {
+          "target_id": "poisoned386",
+          "target_rank_in_saved_pool": 4,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "16495649",
+            "42404093",
+            "21260231",
+            "poisoned386",
+            "22371455"
+          ]
+        },
+        "388": {
+          "target_id": "poisoned388",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.5,
+          "top_ids": [
+            "21602220",
+            "poisoned388",
+            "1148122",
+            "22908536",
+            "418246"
+          ]
+        },
+        "399": {
+          "target_id": "poisoned399",
+          "target_rank_in_saved_pool": 3,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "791050",
+            "471921",
+            "poisoned399",
+            "42387637",
+            "21003930"
+          ]
+        },
+        "410": {
+          "target_id": "poisoned410",
+          "target_rank_in_saved_pool": 3,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14924526",
+            "116792",
+            "poisoned410",
+            "29723642",
+            "15889329"
+          ]
+        },
+        "411": {
+          "target_id": "poisoned411",
+          "target_rank_in_saved_pool": 7,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14924526",
+            "15889329",
+            "29723642",
+            "116792",
+            "1410197"
+          ]
+        },
+        "415": {
+          "target_id": "poisoned415",
+          "target_rank_in_saved_pool": 46,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "4709641",
+            "20937018",
+            "12443371",
+            "24906548",
+            "18852643"
+          ]
+        },
+        "421": {
+          "target_id": "poisoned421",
+          "target_rank_in_saved_pool": 1,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "poisoned421",
+            "4429118",
+            "4346436",
+            "2242416",
+            "36271512"
+          ]
+        },
+        "431": {
+          "target_id": "poisoned431",
+          "target_rank_in_saved_pool": 22,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "29073751",
+            "2543135",
+            "23887844",
+            "1941721",
+            "10993232"
+          ]
+        },
+        "436": {
+          "target_id": "poisoned436",
+          "target_rank_in_saved_pool": 99,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14637235",
+            "18038955",
+            "15926408",
+            "12588500",
+            "4899981"
+          ]
+        },
+        "437": {
+          "target_id": "poisoned437",
+          "target_rank_in_saved_pool": 55,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "39851630",
+            "5765455",
+            "3863543",
+            "2359152",
+            "33677323"
+          ]
+        },
+        "439": {
+          "target_id": "poisoned439",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4423559",
+            "18575183",
+            "4932668",
+            "17049436",
+            "5395426"
+          ]
+        },
+        "440": {
+          "target_id": "poisoned440",
+          "target_rank_in_saved_pool": 100,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "4423559",
+            "18575183",
+            "4932668",
+            "17049436",
+            "39763465"
+          ]
+        },
+        "443": {
+          "target_id": "poisoned443",
+          "target_rank_in_saved_pool": 54,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "10165258",
+            "11289247",
+            "13980338",
+            "18909530",
+            "12130067"
+          ]
+        },
+        "452": {
+          "target_id": "poisoned452",
+          "target_rank_in_saved_pool": 1,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 0.0,
+          "clean_ndcg_at_k": 0.0,
+          "top_ids": [
+            "poisoned452",
+            "16237005",
+            "40254495",
+            "9154703",
+            "18333304"
+          ]
+        },
+        "475": {
+          "target_id": "poisoned475",
+          "target_rank_in_saved_pool": 56,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 0.43067655807339306,
+          "top_ids": [
+            "195689757",
+            "8477699",
+            "8724666",
+            "18678095",
+            "23576165"
+          ]
+        },
+        "478": {
+          "target_id": "poisoned478",
+          "target_rank_in_saved_pool": 61,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "14767844",
+            "10562341",
+            "40096222",
+            "1605392",
+            "20344442"
+          ]
+        },
+        "491": {
+          "target_id": "poisoned491",
+          "target_rank_in_saved_pool": 50,
+          "target_hit_at_k": false,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "56893404",
+            "15692098",
+            "1576955",
+            "834336",
+            "43311750"
+          ]
+        },
+        "501": {
+          "target_id": "poisoned501",
+          "target_rank_in_saved_pool": 2,
+          "target_hit_at_k": true,
+          "clean_recall_at_k": 1.0,
+          "clean_ndcg_at_k": 1.0,
+          "top_ids": [
+            "17930286",
+            "poisoned501",
+            "21274919",
+            "24865781",
+            "6191684"
+          ]
+        }
+      },
+      "queries_with_relevant_at_5": 87,
+      "queries_without_relevant_at_5": 13,
+      "queries_with_fewer_than_5": 0,
+      "lost_relevant_query_vs_dense": [
+        "384",
+        "415",
+        "452"
+      ],
+      "gained_relevant_query_vs_dense": [
+        "198",
+        "261",
+        "294",
+        "300",
+        "312",
+        "314"
+      ],
+      "incremental_cpu_timing": {
+        "samples": 100,
+        "mean_ms": 2.3625979999269475,
+        "p50_ms": 2.2613000001001637,
+        "p95_ms": 3.2209299999522045
+      }
+    }
+  },
+  "provenance": {
+    "kind": "Extracted from existing local replay; not a new experiment",
+    "source": "local_replay_result_saved_in_this_folder",
+    "method": "budgeted_rrf_100"
+  }
+}

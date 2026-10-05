@@ -1,0 +1,19 @@
+{
+  "policy": "rules",
+  "metrics": {
+    "queries": 100,
+    "target_hits_at_k": 100,
+    "target_hit_rate_at_k": 1.0,
+    "clean_recall_at_k": 0.8181666666666666,
+    "clean_ndcg_at_k": 0.5403429009302484,
+    "blocked_clean_documents": 0,
+    "clean_block_rate": 0.0,
+    "blocked_attack_documents": 0,
+    "attack_block_rate": 0.0
+  },
+  "provenance": {
+    "kind": "Extracted from existing local replay; not a new experiment",
+    "source": "local_replay_result_saved_in_this_folder",
+    "method": "rules"
+  }
+}
