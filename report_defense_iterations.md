@@ -21,8 +21,9 @@ Không được đánh giá một defense chỉ bằng tỷ lệ chặn poison. 
 - Embedding model: `sentence-transformers/all-MiniLM-L6-v2`.
 - RAG model: `google/flan-t5-small`.
 - Top-k cuối: 3.
-- Dual-Filter: chunk 25 token NLTK, semantic range `0.4`, mean GPT-2 perplexity `200`.
-- Các ngưỡng hiện tại chưa được calibration trên tập clean độc lập.
+- Dual-Filter: chunk 25 token NLTK, semantic range và mean GPT-2 perplexity.
+- Cấu hình hiện tại: semantic range `0.6`, mean perplexity `300` (điểm vận hành
+  Balanced, còn cần kiểm tra trên tập held-out).
 
 ## Lịch sử kết quả
 
@@ -30,13 +31,15 @@ Không được đánh giá một defense chỉ bằng tỷ lệ chặn poison. 
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | 1 | Dual-Filter, không refill | 10 | 3/3 | 70% | 0% | 20% → 0% | 10% | 40% | 43,3% |
 | 2 | Dual-Filter, không refill | 100 | 3/3 | 56% | 0% | 9% → 1% | 29% | 38% | 54,0% |
-| 3 | Top-10 → filter → top-3, refill + spotlighting | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | 0% | 9% → 0% | **6%** | **6%** | **42,4%** |
+| 3 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng `0,4/200` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | 0% | 9% → 0% | **6%** | **6%** | **42,4%** |
+| 4 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng Balanced `0,6/300` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | **2%** | 9% → **0%** | **0%** | **0%** | **10,5%** |
 
 ### Nguồn kết quả
 
 - Lượt 1: `usenix_results_20261012T040649_851126Z.zip` — 10 query.
 - Lượt 2: `usenix_results_20261012T164034_445939Z.zip` — 100 query, không refill.
 - Lượt 3: [`result/usenix_results_20261013T073849_806751Z.zip`](./result/usenix_results_20261013T073849_806751Z.zip) — 100 query, candidate top-10, refill và prompt spotlighting.
+- Lượt 4: [`result/usenix_results_20261013T085302_453423Z.zip`](./result/usenix_results_20261013T085302_453423Z.zip) — 100 query, cùng pipeline lượt 3 nhưng đổi ngưỡng sang `0,6/300`.
 
 ## Đánh giá lượt mới nhất
 
@@ -59,6 +62,58 @@ Trade-off vẫn còn lớn:
 | MRR@3 | 0,5050 | 0,2233 |
 
 Kết luận của lượt 3: cơ chế candidate top-10 và refill đã giải quyết phần lớn vấn đề context rỗng, nhưng Dual-Filter vẫn loại nhầm quá nhiều tài liệu sạch. Chưa nên coi đây là cấu hình triển khai cuối.
+
+## Đánh giá lượt 4: cấu hình Balanced
+
+Lượt 4 dùng đúng notebook sau khi cập nhật commit `c7946c0`, với
+`threshold_1=0.6`, `threshold_2=300`, `candidate_k=10`, `final_k=3`, refill và
+prompt spotlighting được giữ nguyên.
+
+| Metric | Trước defense | Sau defense |
+|---|---:|---:|
+| Clean Recall@3 | 0,0946 | **0,0724** |
+| Clean nDCG@3 | 0,3953 | **0,3316** |
+| Clean MRR@3 | 0,5050 | **0,4400** |
+
+So với lượt 3, false positive giảm từ `42,4%` xuống `10,5%`, clean và poisoned
+empty context đều giảm từ `6%` xuống `0%`. Detector phát hiện `98/100`
+tài liệu poisoned; trong các tài liệu poisoned được truy xuất, phát hiện được
+`64/66` (`96,97%`). Poison exposure sau defense còn `2%` và target ASR giảm từ
+`9%` xuống `0%`. Thời gian filter là khoảng `103,3` giây cho 100 query.
+
+Đây là điểm cân bằng tốt hơn lượt 3: utility retrieval giảm ít hơn trong khi
+vẫn chặn phần lớn poison. Tuy nhiên, `thresholds_calibrated` vẫn là `false`.
+Các con số `0,6/300` được chọn từ threshold sweep trên cùng batch 100 query,
+chưa phải đánh giá độc lập.
+
+### So sánh các ngưỡng trong lượt 4
+
+| Ngưỡng semantic/perplexity | Clean FP | Poison detection | Poison exposure sau | Clean Recall@3 |
+|---|---:|---:|---:|---:|
+| `0,4/200` (aggressive) | 42,4% | 100% | 0% | 0,0260 |
+| **`0,6/300` (Balanced)** | **10,5%** | **98%** | **2%** | **0,0724** |
+| `0,8/500` (conservative) | 0,2% | 48% | 31% | 0,0936 |
+
+Ngưỡng `0,8/500` giữ retrieval sạch tốt hơn nhưng để lọt quá nhiều poison,
+không phù hợp làm cấu hình bảo vệ chính. Ngưỡng `0,6/300` là lựa chọn tạm
+thời để tiếp tục thử nghiệm.
+
+## Chuỗi cải tiến từ baseline 10 tài liệu
+
+1. **Baseline 10 query:** chạy pipeline gốc trên 10 tài liệu/query để xác nhận
+   CEM và đo được poison exposure `70%`, clean FP khoảng `43,3%`, clean empty
+   `10%`, poisoned empty `40%`. Đây là smoke test nhỏ, chưa đủ để kết luận.
+2. **Mở rộng lên 100 query:** tăng cỡ đánh giá để giảm dao động của kết quả.
+   Lượt 2 cho thấy detector chặn được poison nhưng clean FP lên `54%` và
+   empty context rất cao (`29%` clean, `38%` poisoned).
+3. **Mở rộng candidate và refill:** lấy top-10 trước khi lọc, lọc tài liệu bị
+   đánh dấu, sau đó refill tài liệu an toàn để đủ top-3; bật prompt spotlighting
+   ở RAG. Lượt 3 làm empty context giảm còn `6%`, nhưng ngưỡng `0,4/200` quá
+   chặt nên clean FP vẫn `42,4%`.
+4. **Calibration sơ bộ bằng threshold sweep:** lưu đồng thời kết quả của cả hai
+   filter rồi tính lại nhiều cặp ngưỡng mà không chạy lại CEM. Chọn `0,6/300`
+   vì giảm clean FP xuống `10,5%` mà vẫn giữ poison detection `98%` và exposure
+   `2%`. Đây là lượt 4 và là kết quả hiện tại.
 
 ## Cách đọc các metric
 
