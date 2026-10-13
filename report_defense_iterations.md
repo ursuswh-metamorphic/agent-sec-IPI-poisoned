@@ -12,7 +12,7 @@ File này ghi lại kết quả theo từng lần thay đổi defense trong note
 
 Không được đánh giá một defense chỉ bằng tỷ lệ chặn poison. Một defense chỉ hữu ích khi giữ được chất lượng tài liệu sạch và không làm hệ thống abstain quá thường xuyên.
 
-## Cách hệ thống hoạt động và ý nghĩa của từng cơ chế
+## PHẦN 1 — Phân tích baseline
 
 ### 1. Baseline retrieval và tấn công CEM
 
@@ -25,7 +25,21 @@ Baseline dùng để đo hai điều: poison có lọt vào context hay không, 
 của RAG có bị ép theo payload hay không. Đây là mốc so sánh trước khi thêm defense;
 nó không có bước kiểm tra an toàn sau retrieval.
 
-### 2. Dual-Filter Chunk Consistency
+Trong báo cáo này, baseline thực nghiệm ban đầu là pipeline Dual-Filter chạy trực
+tiếp trên top-3, không có candidate pool mở rộng, không refill và chưa có prompt
+spotlighting. Lượt đầu chỉ có 10 query để kiểm tra pipeline; lượt 2 mở rộng lên
+100 query để làm baseline ổn định hơn.
+
+| Baseline | Query | Poison exposure sau | Clean FP | Clean empty | Poisoned empty | ASR sau |
+|---|---:|---:|---:|---:|---:|---:|
+| Baseline nhỏ, top-3, không refill | 10 | 0% | 43,3% | 10% | 40% | 0% |
+| Baseline mở rộng, top-3, không refill | 100 | 0% | 54,0% | 29% | 38% | 1% |
+
+Baseline cho thấy Dual-Filter có khả năng chặn poison, nhưng phải trả giá bằng
+việc loại nhầm nhiều tài liệu sạch và làm context bị rỗng. Vì vậy, chỉ báo
+`poison exposure sau = 0%` chưa đủ để kết luận defense hữu ích.
+
+### 2. Dual-Filter Chunk Consistency trong baseline
 
 Sau khi retrieval chọn tài liệu ứng viên, mỗi tài liệu được chia thành các chunk
 liền nhau tối đa 25 token. Defense tính hai tín hiệu:
@@ -48,6 +62,12 @@ chỉ quyết định tài liệu nào được đưa tiếp vào context.
 giữa các đoạn; perplexity tìm chuỗi ngôn ngữ bất thường. Đổi lại, tài liệu sạch
 ngắn, chuyên ngành hoặc có văn phong lạ cũng có thể bị đánh dấu nhầm.
 
+Đây là thành phần bảo vệ đã có trong baseline và được giữ lại ở các lượt sau.
+Các cải tiến tiếp theo tập trung vào cách chọn ứng viên, cách bù tài liệu bị loại
+và cách điều chỉnh ngưỡng để giảm tác dụng phụ của Dual-Filter.
+
+## PHẦN 2 — Các cải tiến sau baseline
+
 ### 3. Candidate top-10 và final top-3
 
 Thay vì chỉ lấy top-3 rồi lọc, notebook lấy **10 ứng viên đầu tiên**, chạy
@@ -58,6 +78,10 @@ ra một vùng dự phòng: nếu một tài liệu trong top-3 bị loại, cá
 Ý nghĩa: tăng candidate pool không tự làm detector chính xác hơn, nhưng làm hệ
 thống ít phụ thuộc vào ba tài liệu đầu tiên và giảm nguy cơ mất toàn bộ context.
 Chi phí là phải tính filter cho nhiều tài liệu hơn.
+
+So với baseline top-3, thay đổi này mở rộng số tài liệu được kiểm tra từ 3 lên 10.
+Nó tạo thêm lựa chọn để refill, nhưng chưa tự giảm false positive; lượt 3 vẫn có
+clean FP `42,4%` vì còn dùng ngưỡng aggressive `0,4/200`.
 
 ### 4. Refill tài liệu an toàn
 
@@ -71,6 +95,10 @@ Khi kết hợp top-10 với refill, các tỷ lệ này giảm xuống `6%`, r�
 cấu hình Balanced. Refill không làm poison an toàn; chỉ dùng các tài liệu đã qua
 filter để thay thế tài liệu bị loại.
 
+So với baseline mở rộng 100 query, refill giảm clean empty context từ `29%` xuống
+`6%` ở lượt 3 và xuống `0%` ở lượt 4. Đây là cải tiến về tính liên tục của hệ
+thống, không phải bằng chứng detector chính xác hơn.
+
 ### 5. Prompt spotlighting
 
 Trước khi gửi context vào RAG, notebook thêm chỉ dẫn định dạng để nói rõ phần
@@ -81,6 +109,11 @@ gắng điều khiển model.
 Ý nghĩa: spotlighting tạo ranh giới vai trò giữa system/user instruction và văn
 bản retrieved. Nó là lớp giảm tác động lên câu trả lời, không phải detector poison;
 vì vậy cần đánh giá riêng bằng ablation để biết đóng góp của nó.
+
+So với baseline, spotlighting bổ sung một lớp bảo vệ ở tầng RAG. Trong lượt 3 và
+4, ASR giảm từ `9%` trước defense xuống `0%` sau defense, nhưng vì refill,
+threshold và spotlighting cùng được bật nên chưa thể quy toàn bộ mức giảm này cho
+spotlighting.
 
 ### 6. Threshold sweep và chọn cấu hình Balanced
 
@@ -96,6 +129,21 @@ Chọn `0.6/300` có nghĩa là ưu tiên điểm cân bằng tạm thời: ch�
 poison rất nhỏ để giảm đáng kể việc loại nhầm tài liệu sạch. Đây chưa phải
 calibration độc lập vì các ngưỡng được chọn sau khi xem cùng batch 100 query;
 cần xác nhận trên clean calibration split và held-out query.
+
+### So sánh tổng thể baseline và cấu hình hiện tại
+
+| Metric | Baseline 100 query | Sau cải tiến Balanced | Thay đổi |
+|---|---:|---:|---:|
+| Poison exposure sau | 0% | 2% | tăng 2 điểm %, vẫn rất thấp |
+| Clean FP | 54,0% | **10,5%** | giảm 43,5 điểm % |
+| Clean empty context | 29% | **0%** | giảm 29 điểm % |
+| Poisoned empty context | 38% | **0%** | giảm 38 điểm % |
+| Target ASR sau | 1% | **0%** | giảm 1 điểm % |
+
+Nếu so với lượt 3 ngay trước Balanced, clean FP giảm tiếp từ `42,4%` xuống
+`10,5%`, trong khi poison detection vẫn đạt `98%`. Đổi lại, poison exposure
+không còn bằng 0 mà là `2%`; đây là trade-off có chủ ý để tránh lọc nhầm quá
+nhiều tài liệu sạch.
 
 ## Thiết lập chung
 
