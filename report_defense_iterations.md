@@ -12,6 +12,91 @@ File này ghi lại kết quả theo từng lần thay đổi defense trong note
 
 Không được đánh giá một defense chỉ bằng tỷ lệ chặn poison. Một defense chỉ hữu ích khi giữ được chất lượng tài liệu sạch và không làm hệ thống abstain quá thường xuyên.
 
+## Cách hệ thống hoạt động và ý nghĩa của từng cơ chế
+
+### 1. Baseline retrieval và tấn công CEM
+
+Với mỗi query, dense retriever mã hóa query và các tài liệu thành vector rồi xếp
+hạng theo cosine similarity. Tài liệu CEM được tạo bằng cách tối ưu một chuỗi
+token ngắn ở đầu tài liệu để làm tăng điểm similarity với query. Vì vậy, tài liệu
+độc có thể lọt vào top-k dù nội dung thật sự không liên quan.
+
+Baseline dùng để đo hai điều: poison có lọt vào context hay không, và câu trả lời
+của RAG có bị ép theo payload hay không. Đây là mốc so sánh trước khi thêm defense;
+nó không có bước kiểm tra an toàn sau retrieval.
+
+### 2. Dual-Filter Chunk Consistency
+
+Sau khi retrieval chọn tài liệu ứng viên, mỗi tài liệu được chia thành các chunk
+liền nhau tối đa 25 token. Defense tính hai tín hiệu:
+
+1. **Semantic range:** mã hóa query và từng chunk bằng MiniLM, sau đó tính
+   `max(cosine) - min(cosine)`. Tài liệu có một đoạn rất giống query nhưng các
+   đoạn còn lại lệch mạnh sẽ có range lớn. Đây là dấu hiệu có nội dung chèn lệch
+   chủ đề hoặc phần prefix bất thường.
+2. **Perplexity:** tính perplexity GPT-2 riêng trên từng chunk rồi lấy trung bình.
+   Perplexity cao nghĩa là chuỗi token khó đoán đối với mô hình ngôn ngữ; các
+   chuỗi token ngẫu nhiên dùng trong CEM thường tạo tín hiệu này.
+
+Ở cấu hình `evaluate_both_filters=True`, notebook lưu cả hai tín hiệu cho mọi
+ứng viên. Một tài liệu bị đánh dấu khi semantic range vượt `threshold_1` hoặc
+perplexity trung bình vượt `threshold_2`. Defense hoạt động ở vị trí
+**post-retrieval, pre-RAG**: nó không sửa corpus và không thay đổi retriever,
+chỉ quyết định tài liệu nào được đưa tiếp vào context.
+
+Ý nghĩa: hai tín hiệu bổ sung cho nhau. Semantic range tìm sự không nhất quán
+giữa các đoạn; perplexity tìm chuỗi ngôn ngữ bất thường. Đổi lại, tài liệu sạch
+ngắn, chuyên ngành hoặc có văn phong lạ cũng có thể bị đánh dấu nhầm.
+
+### 3. Candidate top-10 và final top-3
+
+Thay vì chỉ lấy top-3 rồi lọc, notebook lấy **10 ứng viên đầu tiên**, chạy
+defense trên cả 10, sau đó chọn 3 tài liệu an toàn để đưa vào RAG. Cách này tạo
+ra một vùng dự phòng: nếu một tài liệu trong top-3 bị loại, các tài liệu ở vị trí
+4–10 có thể thay thế.
+
+Ý nghĩa: tăng candidate pool không tự làm detector chính xác hơn, nhưng làm hệ
+thống ít phụ thuộc vào ba tài liệu đầu tiên và giảm nguy cơ mất toàn bộ context.
+Chi phí là phải tính filter cho nhiều tài liệu hơn.
+
+### 4. Refill tài liệu an toàn
+
+Sau khi loại các ứng viên đáng ngờ, hệ thống duyệt phần còn lại theo thứ hạng và
+điền đủ `final_k=3` bằng các tài liệu không bị đánh dấu. Nếu không đủ tài liệu an
+toàn, context có thể ngắn hơn 3 tài liệu hoặc rỗng.
+
+Ý nghĩa: refill giải quyết lỗi vận hành của detector quá chặt. Ở lượt 2, lọc
+trực tiếp top-3 làm clean empty context `29%` và poisoned empty context `38%`.
+Khi kết hợp top-10 với refill, các tỷ lệ này giảm xuống `6%`, rồi còn `0%` ở
+cấu hình Balanced. Refill không làm poison an toàn; chỉ dùng các tài liệu đã qua
+filter để thay thế tài liệu bị loại.
+
+### 5. Prompt spotlighting
+
+Trước khi gửi context vào RAG, notebook thêm chỉ dẫn định dạng để nói rõ phần
+context là **dữ liệu tham khảo**, không phải instruction phải tuân theo. Cơ chế này
+nhắm vào indirect prompt injection ở tầng RAG, nơi nội dung tài liệu có thể cố
+gắng điều khiển model.
+
+Ý nghĩa: spotlighting tạo ranh giới vai trò giữa system/user instruction và văn
+bản retrieved. Nó là lớp giảm tác động lên câu trả lời, không phải detector poison;
+vì vậy cần đánh giá riêng bằng ablation để biết đóng góp của nó.
+
+### 6. Threshold sweep và chọn cấu hình Balanced
+
+Notebook lưu tín hiệu semantic và perplexity trước, sau đó tính lại verdict với
+nhiều cặp ngưỡng. Cách này tránh phải chạy lại CEM cho từng cặp threshold và cho
+thấy trade-off giữa bảo mật và retrieval utility:
+
+- `0.4/200`: chặn mạnh, poison exposure `0%`, nhưng clean FP `42,4%`.
+- `0.6/300`: clean FP `10,5%`, poison detection `98%`, exposure `2%`.
+- `0.8/500`: giữ tài liệu sạch tốt hơn, nhưng để lọt `31%` poison.
+
+Chọn `0.6/300` có nghĩa là ưu tiên điểm cân bằng tạm thời: chấp nhận một tỷ lệ
+poison rất nhỏ để giảm đáng kể việc loại nhầm tài liệu sạch. Đây chưa phải
+calibration độc lập vì các ngưỡng được chọn sau khi xem cùng batch 100 query;
+cần xác nhận trên clean calibration split và held-out query.
+
 ## Thiết lập chung
 
 - Dataset: NFCorpus.
