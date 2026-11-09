@@ -167,8 +167,11 @@ nhiều tài liệu sạch.
 | 3 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng `0,4/200` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | 0% | 9% → 0% | **6%** | **6%** | **42,4%** |
 | 4 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng Balanced `0,6/300` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | **2%** | 9% → **0%** | **0%** | **0%** | **10,5%** |
 | 5 | Cấu hình lượt 4, **tấn công P²A** (văn bản độc trôi chảy) thay cho CEM | 100 | 10/3 | 100% ở top-3 | **79%** | 4% → 1% (*) | 0% | 0% | 10,5% |
+| 6 | Lượt 4 + **kiểm tra nhất quán NLI** sau Dual-Filter (τ = 0,2), tấn công P²A | 100 | 10/3 | 100% ở top-3 | **75%** | 4% → 1% (*) | 0% | 0% | 10,5% + 3,9% (**) |
 
 (*) Target Yes ASR không đo được tác động của P²A trên NFCorpus; xem phần đánh giá lượt 5.
+
+(**) `10,5%` là FP của Dual-Filter; `3,9%` là tỷ lệ tài liệu sạch (đã qua Dual-Filter) bị bước NLI chặn thêm.
 
 ### Nguồn kết quả
 
@@ -177,6 +180,7 @@ nhiều tài liệu sạch.
 - Lượt 3: [`result/usenix_results_20261013T073849_806751Z.zip`](./result/usenix_results_20261013T073849_806751Z.zip) — 100 query, candidate top-10, refill và prompt spotlighting.
 - Lượt 4: [`result/usenix_results_20261013T085302_453423Z.zip`](./result/usenix_results_20261013T085302_453423Z.zip) — 100 query, cùng pipeline lượt 3 nhưng đổi ngưỡng sang `0,6/300`.
 - Lượt 5: [`result/usenix_results_20261108T185216_146791Z.zip`](./result/usenix_results_20261108T185216_146791Z.zip) — chạy lại toàn bộ notebook (commit `f832fd4`). Phần CEM nằm ở `results/dual_filter/`, phần P²A ở `results/p2a/`.
+- Lượt 6: [`result/usenix_results_20261109T081526_719962Z.zip`](./result/usenix_results_20261109T081526_719962Z.zip) — chạy lại toàn bộ notebook (commit `ea89556`). Phần mới nằm ở `results/consistency/`.
 
 ## Đánh giá lượt mới nhất
 
@@ -350,6 +354,83 @@ Giới hạn của lượt 5: model sinh 3B yếu hơn GPT-4o trong paper; chỉ
 cùng batch; vẫn là attack không biết defense (adaptive attack có thể còn mạnh hơn);
 không đo được tác động lên câu trả lời của LLM vì lý do ở trên.
 
+## Đánh giá lượt 6: claim-adoption ASR và kiểm tra nhất quán NLI
+
+### Mục đích
+
+Lượt 5 để lại hai vấn đề: target Yes ASR không đo được P²A, và Dual-Filter không có
+tín hiệu nào cho văn bản trôi chảy. Lượt 6 (notebook mục 11.3) thử cả hai, **không
+đổi Dual-Filter**:
+
+- **Claim-adoption ASR:** lấy câu đầu của đoạn P²A làm khẳng định của tài liệu độc;
+  dùng NLI (`cross-encoder/nli-deberta-v3-base`) kiểm tra câu trả lời RAG có kéo theo
+  khẳng định đó không. Chỉ đếm query mà câu trả lời trên corpus sạch chưa kéo theo
+  (96/100 query đủ điều kiện).
+- **Kiểm tra nhất quán (ý tưởng TrustRAG, bản rút gọn):** sau Dual-Filter, với mỗi
+  candidate còn lại, tính tỷ lệ các candidate khác mâu thuẫn với khẳng định của nó
+  (xác suất contradiction > 0,5). Chặn nếu tỷ lệ ≥ τ. τ chọn **chỉ từ nhánh clean**:
+  τ nhỏ nhất có FP ≤ 10%.
+
+### Chọn τ
+
+| τ | 0,1 | 0,2 | 0,3 | 0,4 | 0,5 |
+|---|---:|---:|---:|---:|---:|
+| FP tài liệu sạch (sau Dual-Filter, 895 tài liệu) | 21,0% | **3,9%** | 1,0% | 0,7% | 0,4% |
+
+τ = 0,2 được chọn.
+
+### Kết quả ở τ = 0,2
+
+| Biến thể | Poison lọt qua Dual-Filter | NLI bắt thêm (trong số lọt) | Exposure sau Dual-Filter | Exposure sau cả hai bước |
+|---|---:|---:|---:|---:|
+| CEM | 2% | 1/2 | 2% | 1% |
+| P²A | 79% | 5,1% | 79% | **75%** |
+| P²A + payload | 14% | 7,1% | 13% | 12% |
+
+Kể cả τ = 0,1 (FP 21%), exposure P²A vẫn còn `63%`.
+
+Phân bố tỷ lệ bị mâu thuẫn gần như trùng nhau:
+
+| Nhóm | n | Trung bình | Trung vị | p90 | Max |
+|---|---:|---:|---:|---:|---:|
+| Tài liệu sạch | 895 | 0,032 | 0 | 0,111 | 1,0 |
+| P²A (đã qua Dual-Filter) | 79 | 0,029 | 0 | 0,111 | 0,25 |
+
+### Claim-adoption ASR
+
+| Biến thể | Không defense | Dual-Filter | Dual-Filter + NLI |
+|---|---:|---:|---:|
+| P²A | 10,4% | 27,1% | 26,0% |
+| P²A + payload | 8,3% | 3,1% | 3,1% |
+
+Target Yes ASR sau cả hai bước: P²A `4% → 1%`, P²A + payload `11% → 1%`, CEM `9% → 0%`.
+Không có query nào bị rỗng context ở nhánh clean.
+
+### Nhận xét
+
+1. **Kiểm tra nhất quán NLI không tách được P²A khỏi tài liệu sạch trên NFCorpus.**
+   Các abstract y khoa hầu như được NLI xếp "neutral" với nhau, nên tài liệu độc
+   cũng hiếm khi bị mâu thuẫn. Bước mới chỉ giảm exposure P²A từ `79%` xuống `75%`.
+2. **Claim ASR "tăng" sau Dual-Filter là do khác prompt, không phải do defense.**
+   Nhánh "không defense" dùng prompt gốc; nhánh sau defense bọc tài liệu bằng
+   spotlighting `[UNTRUSTED DOCUMENT]`, làm đổi hành vi của FLAN-T5-small. Muốn so
+   đúng cần thêm nhánh có spotlighting nhưng không lọc.
+3. **Câu khẳng định chất lượng thấp.** Vì ép đáp án mục tiêu `Yes` cho các query
+   NFCorpus không phải câu hỏi có/không, nhiều đoạn P²A mở đầu bằng câu nói về
+   chính câu hỏi (ví dụ: *"Deafness… can indeed be answered affirmatively as 'Yes'…"*)
+   thay vì một mệnh đề y khoa. Claim ASR vì vậy chỉ là chỉ số tham khảo.
+4. **FLAN-T5-small hiếm khi bị thuyết phục** ngay cả khi không có defense (claim ASR
+   10%), nên tầng generation đang đánh giá thấp mức nguy hiểm của P²A.
+
+### Kết luận lượt 6
+
+Trên NFCorpus, cả perplexity lẫn kiểm tra nhất quán bằng NLI đều không phát hiện
+được tài liệu độc viết trôi chảy. Dual-Filter + NLI vẫn để `75%` tài liệu P²A vào
+top-3. Bước NLI tốn thêm khoảng 160 giây cho 8.895 cặp trên T4.
+
+Giới hạn: TrustRAG gốc dùng LLM đánh giá xung đột và clustering, mạnh hơn NLI
+cross-encoder; khẳng định được rút bằng quy tắc "1–2 câu đầu"; NLI chỉ đọc 512 token.
+
 ## Chuỗi cải tiến từ baseline 10 tài liệu
 
 1. **Baseline 10 query:** chạy pipeline gốc trên 10 tài liệu/query để xác nhận
@@ -370,6 +451,9 @@ không đo được tác động lên câu trả lời của LLM vì lý do ở 
    bằng tài liệu độc do LLM viết trôi chảy. Exposure sau defense tăng từ `2%`
    lên `79%`, vì perplexity không còn phát hiện được gì. Lượt 5 không cải tiến
    defense mà cho thấy giới hạn của nó.
+6. **Thêm kiểm tra nhất quán NLI sau Dual-Filter:** τ chọn từ nhánh clean
+   (`0,2`, FP thêm `3,9%`). Exposure P²A chỉ giảm từ `79%` xuống `75%` vì NLI
+   hầu như không thấy mâu thuẫn giữa các abstract NFCorpus.
 
 ## Cách đọc các metric
 
@@ -383,7 +467,17 @@ không đo được tác động lên câu trả lời của LLM vì lý do ở 
 
 ## Khuyến nghị cho lượt tiếp theo
 
-Ưu tiên sau lượt 5:
+Ưu tiên sau lượt 6:
+
+1. **Sửa thiết lập tấn công trước khi thử thêm defense:** đặt đáp án sai cụ thể cho
+   từng query (không ép `Yes`), hoặc chuyển sang dataset QA thật (NQ, HotpotQA) với
+   LLM sinh mạnh hơn FLAN-T5-small. Nếu không, mọi ASR đều khó diễn giải.
+2. Thêm nhánh "spotlighting nhưng không lọc" để tách tác động của prompt khỏi
+   tác động của filter.
+3. Thử các tín hiệu còn lại: cross-encoder reranker; phát hiện tài liệu chép nguyên
+   câu hỏi ở đầu; consistency bằng LLM đánh giá (TrustRAG đầy đủ) thay cho NLI.
+
+Khuyến nghị sau lượt 5 (mục 2 về kiểm tra nhất quán NLI đã thử ở lượt 6, không hiệu quả trên NFCorpus):
 
 1. **Thêm tín hiệu defense không dựa vào độ "lạ" của văn bản**, vì perplexity và
    semantic range đều không tách được P²A khỏi tài liệu sạch:
@@ -434,4 +528,4 @@ Nhận xét và giới hạn:
 
 ## Giới hạn hiện tại
 
-Các kết quả trên cùng dùng 100 query đầu tiên, chưa phải held-out evaluation. Payload poisoned được tạo trước khi biết defense; chưa phải attacker thích nghi. Lượt 5 đã xác nhận rủi ro này: chỉ cần thay CEM bằng văn bản độc trôi chảy (vẫn không biết defense), exposure sau defense tăng từ `2%` lên `79%`. Hiệu quả của Dual-Filter chỉ được chứng minh với CEM. Lượt mới bật refill và prompt spotlighting cùng lúc nên chưa thể tách riêng đóng góp của hai thay đổi này. Các kết quả cũng chưa chứng minh câu trả lời của LLM đúng trong hệ thống production.
+Các kết quả trên cùng dùng 100 query đầu tiên, chưa phải held-out evaluation. Payload poisoned được tạo trước khi biết defense; chưa phải attacker thích nghi. Lượt 5 đã xác nhận rủi ro này: chỉ cần thay CEM bằng văn bản độc trôi chảy (vẫn không biết defense), exposure sau defense tăng từ `2%` lên `79%`. Hiệu quả của Dual-Filter chỉ được chứng minh với CEM. Lượt 6 cho thấy thêm kiểm tra nhất quán bằng NLI cũng không khắc phục được (exposure P²A `75%`). Lượt mới bật refill và prompt spotlighting cùng lúc nên chưa thể tách riêng đóng góp của hai thay đổi này. Các kết quả cũng chưa chứng minh câu trả lời của LLM đúng trong hệ thống production.
