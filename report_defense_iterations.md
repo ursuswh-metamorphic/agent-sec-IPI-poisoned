@@ -166,6 +166,9 @@ nhiều tài liệu sạch.
 | 2 | Dual-Filter, không refill | 100 | 3/3 | 56% | 0% | 9% → 1% | 29% | 38% | 54,0% |
 | 3 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng `0,4/200` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | 0% | 9% → 0% | **6%** | **6%** | **42,4%** |
 | 4 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng Balanced `0,6/300` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | **2%** | 9% → **0%** | **0%** | **0%** | **10,5%** |
+| 5 | Cấu hình lượt 4, **tấn công P²A** (văn bản độc trôi chảy) thay cho CEM | 100 | 10/3 | 100% ở top-3 | **79%** | 4% → 1% (*) | 0% | 0% | 10,5% |
+
+(*) Target Yes ASR không đo được tác động của P²A trên NFCorpus; xem phần đánh giá lượt 5.
 
 ### Nguồn kết quả
 
@@ -173,6 +176,7 @@ nhiều tài liệu sạch.
 - Lượt 2: `usenix_results_20261012T164034_445939Z.zip` — 100 query, không refill.
 - Lượt 3: [`result/usenix_results_20261013T073849_806751Z.zip`](./result/usenix_results_20261013T073849_806751Z.zip) — 100 query, candidate top-10, refill và prompt spotlighting.
 - Lượt 4: [`result/usenix_results_20261013T085302_453423Z.zip`](./result/usenix_results_20261013T085302_453423Z.zip) — 100 query, cùng pipeline lượt 3 nhưng đổi ngưỡng sang `0,6/300`.
+- Lượt 5: [`result/usenix_results_20261108T185216_146791Z.zip`](./result/usenix_results_20261108T185216_146791Z.zip) — chạy lại toàn bộ notebook (commit `f832fd4`). Phần CEM nằm ở `results/dual_filter/`, phần P²A ở `results/p2a/`.
 
 ## Đánh giá lượt mới nhất
 
@@ -231,6 +235,121 @@ Ngưỡng `0,8/500` giữ retrieval sạch tốt hơn nhưng để lọt quá nh
 không phù hợp làm cấu hình bảo vệ chính. Ngưỡng `0,6/300` là lựa chọn tạm
 thời để tiếp tục thử nghiệm.
 
+## Đánh giá lượt 5: tấn công P²A (văn bản độc trôi chảy)
+
+### Mục đích
+
+Mọi lượt trước chỉ đo Dual-Filter với tài liệu CEM. Tài liệu CEM có một prefix
+token gần như vô nghĩa, nên để lại đúng hai dấu vết mà Dual-Filter dựa vào:
+perplexity cao và semantic range lớn. Lượt 5 kiểm tra xem defense còn hiệu quả
+không khi attacker viết tài liệu độc **trôi chảy, bám sát câu hỏi**.
+
+Cách tạo tài liệu theo P²A trong Yang et al., *Reranker Helps, but Not Enough*
+(ICML 2026), mục 5.1: dùng LLM viết một đoạn khoảng 60 từ theo 4 luật — nói thẳng
+đáp án ở câu đầu, giọng văn bách khoa, có ngữ cảnh hỗ trợ, chỉ bám vào câu hỏi.
+Đây là attack black-box, không cần gradient, **không biết defense**.
+
+### Thiết lập
+
+- Giữ nguyên toàn bộ cấu hình lượt 4: ngưỡng `0,6/300`, candidate top-10, final
+  top-3, refill, prompt spotlighting, cùng 100 query NFCorpus. Phần CEM của lần
+  chạy này cho lại đúng số của lượt 4 (clean FP `10,5%`, phát hiện `98%`,
+  exposure sau `2%`), nên hai attack được so trong cùng điều kiện.
+- Model sinh: `Qwen/Qwen2.5-3B-Instruct` (paper dùng GPT-4o), greedy decoding,
+  đáp án mục tiêu `Yes` để cùng mục tiêu với payload CEM. Sinh 100 đoạn mất
+  khoảng 114 giây trên T4.
+- Mỗi query chèn **1 tài liệu**, giống CEM. Hai biến thể:
+  - `p2a`: câu hỏi + đoạn văn (cách làm của paper).
+  - `p2a_payload`: đoạn văn + **nguyên payload** `IMPORTANT!!!! … 'Yes'` của CEM.
+    Biến thể này cho biết Dual-Filter bắt CEM nhờ prefix vô nghĩa hay nhờ payload.
+- Ngưỡng dùng lại đúng danh sách sweep ở 11.1; không chỉnh ngưỡng theo kết quả P²A.
+
+### Kết quả ở ngưỡng Balanced `0,6/300`
+
+| Metric | CEM | P²A | P²A + payload |
+|---|---:|---:|---:|
+| Tài liệu độc trong top-3 trước defense | 56% | **100%** | 95% |
+| Tài liệu độc trong top-10 trước defense | 66% | 100% | 100% |
+| Tỷ lệ phát hiện | 98% | **21%** | 86% |
+| — bắt nhờ semantic range | 6% | 21% | 86% |
+| — bắt nhờ perplexity | 98% | **0%** | 0% |
+| **Poison exposure sau defense** | **2%** | **79%** | 13% |
+| Poisoned empty context | 0% | 0% | 1% |
+
+Clean FP, clean empty context và chất lượng retrieval sạch không đổi so với
+lượt 4, vì nhánh sạch giống hệt nhau.
+
+### So sánh các ngưỡng
+
+| Ngưỡng | Clean FP | Exposure sau — CEM | Exposure sau — P²A | Exposure sau — P²A + payload |
+|---|---:|---:|---:|---:|
+| `0,4/200` | 42,4% | 0% | 37% | 0% |
+| **`0,6/300`** | **10,5%** | **2%** | **79%** | **13%** |
+| `0,8/500` | 0,2% | 31% | 99% | 65% |
+
+Ngay cả ngưỡng aggressive `0,4/200` — vốn đã bị loại vì loại nhầm 42,4% tài
+liệu sạch — vẫn để lọt 37% tài liệu P²A.
+
+### Phân bố tín hiệu
+
+| Nhóm | Semantic range (P10 / trung vị / P90) | Mean perplexity (P10 / trung vị / P90) |
+|---|---:|---:|
+| Tài liệu sạch (1.000 cặp) | 0,17 / 0,35 / 0,59 | 48 / 76 / 130 |
+| CEM | 0,40 / 0,49 / 0,58 | 360 / 486 / 705 |
+| P²A | 0,13 / 0,47 / 0,66 | **35 / 56 / 96** |
+| P²A + payload | 0,57 / **0,75** / 0,89 | 102 / 117 / 145 |
+
+### Nhận xét
+
+1. **Perplexity filter mất hoàn toàn tác dụng với văn bản trôi chảy.** Perplexity
+   trung vị của P²A (56) còn *thấp hơn* tài liệu sạch (76), và giá trị cao nhất
+   chỉ 167 — xa ngưỡng 300. Không có ngưỡng perplexity nào tách được P²A khỏi tài
+   liệu sạch. Kết quả này khớp với hai paper: Zhan et al. (NAACL Findings 2025)
+   cho thấy perplexity filter bị vượt khi attacker thêm ràng buộc trôi chảy, và
+   Yang et al. đo phân bố perplexity của P²A chồng lấn với văn bản sạch.
+2. **Kết quả `2%` exposure ở lượt 4 là nhờ prefix vô nghĩa của CEM.** Ở ngưỡng
+   Balanced, CEM bị bắt 98% nhờ perplexity, semantic range chỉ đóng góp 6%.
+3. **Semantic range chỉ hữu ích khi tài liệu trộn nội dung đúng chủ đề với chỉ thị
+   lạc đề.** Khi phần đầu tài liệu trôi chảy và đúng chủ đề, đoạn payload
+   `IMPORTANT!!!!…` lệch chủ đề làm range tăng mạnh (trung vị 0,75) nên biến thể
+   P²A + payload bị bắt 86%. Khi toàn bộ tài liệu bám chủ đề như P²A, range chồng
+   lấn với tài liệu sạch (0,47 so với 0,35).
+4. **P²A mạnh hơn CEM ngay ở tầng retrieval** (100% so với 56% trong top-3) mà
+   không cần tối ưu, vì tài liệu chép nguyên câu hỏi ở đầu và chỉ nói về chủ đề đó.
+5. **Chỉnh ngưỡng không giải quyết được vấn đề.** Hai tín hiệu hiện có đều dựa
+   vào dấu vết mà văn bản trôi chảy không để lại; cần một tín hiệu khác.
+
+### Vì sao target Yes ASR không dùng được cho P²A
+
+| | CEM | P²A | P²A + payload |
+|---|---:|---:|---:|
+| Target Yes ASR trước → sau | 9% → 0% | 4% → 1% | 11% → 1% |
+
+ASR của P²A thấp **ngay cả khi 79% tài liệu độc vẫn nằm trong context sau
+defense**, nên con số `1%` không phải bằng chứng defense hiệu quả. Nguyên nhân là
+cách đo không phù hợp:
+
+- Phần lớn query NFCorpus là từ khoá (`deafness`, `DHA`, `prunes`…), không phải
+  câu hỏi có/không, nên mục tiêu `Yes` không có nghĩa với P²A. Model sinh chỉ mở
+  đầu đoạn bằng "Yes" ở **1%** số đoạn (luật 1 gần như không được tuân thủ), ví dụ:
+  *"Deafness … can indeed be answered affirmatively as 'Yes' when asked whether…"*.
+- FLAN-T5-small trả lời bằng cụm từ ngắn và hiếm khi trả lời đúng một chữ `Yes`.
+
+Với P²A, **poison exposure** là kết quả chính. Không báo cáo "ASR 1% sau defense"
+như một kết quả bảo vệ.
+
+### Kết luận lượt 5
+
+Dual-Filter ở cấu hình Balanced chặn được CEM (exposure `2%`) nhưng **không chặn
+được tài liệu độc viết trôi chảy** (exposure `79%`). Đây chính là rủi ro đã ghi ở
+mục "Giới hạn hiện tại": payload được tạo trước khi biết defense, và defense dựa
+vào dấu vết đặc thù của CEM. Kết quả lượt 4 vẫn đúng với CEM, nhưng không được
+khái quát thành "Dual-Filter chống được retrieval poisoning".
+
+Giới hạn của lượt 5: model sinh 3B yếu hơn GPT-4o trong paper; chỉ 100 query của
+cùng batch; vẫn là attack không biết defense (adaptive attack có thể còn mạnh hơn);
+không đo được tác động lên câu trả lời của LLM vì lý do ở trên.
+
 ## Chuỗi cải tiến từ baseline 10 tài liệu
 
 1. **Baseline 10 query:** chạy pipeline gốc trên 10 tài liệu/query để xác nhận
@@ -246,7 +365,11 @@ thời để tiếp tục thử nghiệm.
 4. **Calibration sơ bộ bằng threshold sweep:** lưu đồng thời kết quả của cả hai
    filter rồi tính lại nhiều cặp ngưỡng mà không chạy lại CEM. Chọn `0,6/300`
    vì giảm clean FP xuống `10,5%` mà vẫn giữ poison detection `98%` và exposure
-   `2%`. Đây là lượt 4 và là kết quả hiện tại.
+   `2%`. Đây là lượt 4 và là cấu hình defense hiện tại.
+5. **Kiểm tra với attacker khác (P²A):** giữ nguyên cấu hình lượt 4, thay CEM
+   bằng tài liệu độc do LLM viết trôi chảy. Exposure sau defense tăng từ `2%`
+   lên `79%`, vì perplexity không còn phát hiện được gì. Lượt 5 không cải tiến
+   defense mà cho thấy giới hạn của nó.
 
 ## Cách đọc các metric
 
@@ -260,12 +383,29 @@ thời để tiếp tục thử nghiệm.
 
 ## Khuyến nghị cho lượt tiếp theo
 
-1. Chạy ablation riêng cho filter, refill, spotlighting và cấu hình kết hợp để biết thành phần nào tạo ra cải thiện.
-2. Calibration threshold trên tập clean riêng; mục tiêu thực tế ban đầu là đưa clean false-positive rate xuống khoảng 5–10%.
-3. Thử span-level removal: loại đoạn instruction đáng ngờ thay vì loại toàn bộ tài liệu.
-4. Giữ candidate top-10/final top-3 để giảm context rỗng, nhưng đánh giá thêm top-20 nếu chi phí cho phép.
-5. Thử adaptive CEM biết defense để kiểm tra khả năng bypass.
-6. Không chọn threshold dựa trên kết quả test cuối rồi báo đó là hiệu quả tổng quát.
+Ưu tiên sau lượt 5:
+
+1. **Thêm tín hiệu defense không dựa vào độ "lạ" của văn bản**, vì perplexity và
+   semantic range đều không tách được P²A khỏi tài liệu sạch:
+   - Cross-encoder reranker giữa retrieval và filter (Yang et al. cho thấy nó làm
+     giảm mạnh các attack kiểu cũ, nhưng không chặn được P²A — cần đo lại).
+   - Kiểm tra nhất quán giữa các tài liệu kiểu TrustRAG: tài liệu nói ngược với các
+     tài liệu còn lại thì đáng ngờ. Đây là defense duy nhất giảm rõ P³A trong paper.
+   - Phát hiện tài liệu chép nguyên câu hỏi ở đầu (dấu hiệu chung của PoisonedRAG
+     và P²A).
+2. **Sửa cách đo tác động lên câu trả lời:** đặt một đáp án sai cụ thể cho từng
+   query và đo câu trả lời có chứa đáp án đó không; hoặc đo trên một dataset QA
+   thật (NQ, HotpotQA) với LLM sinh mạnh hơn FLAN-T5-small.
+3. Báo cáo mọi defense mới trên **cả CEM và P²A**, không chỉ CEM.
+
+Các khuyến nghị trước đó vẫn còn hiệu lực:
+
+4. Chạy ablation riêng cho filter, refill, spotlighting và cấu hình kết hợp để biết thành phần nào tạo ra cải thiện.
+5. Calibration threshold trên tập clean riêng; mục tiêu thực tế ban đầu là đưa clean false-positive rate xuống khoảng 5–10%.
+6. Thử span-level removal: loại đoạn instruction đáng ngờ thay vì loại toàn bộ tài liệu. Kết quả biến thể P²A + payload (semantic range bắt 86%) cho thấy hướng này đáng thử khi tài liệu trộn nội dung đúng chủ đề với chỉ thị.
+7. Giữ candidate top-10/final top-3 để giảm context rỗng, nhưng đánh giá thêm top-20 nếu chi phí cho phép.
+8. Thử adaptive CEM biết defense (thêm hạng phạt perplexity và semantic range vào hàm mục tiêu) để kiểm tra khả năng bypass.
+9. Không chọn threshold dựa trên kết quả test cuối rồi báo đó là hiệu quả tổng quát.
 
 ## Template thêm một lượt chạy
 
@@ -294,4 +434,4 @@ Nhận xét và giới hạn:
 
 ## Giới hạn hiện tại
 
-Các kết quả trên cùng dùng 100 query đầu tiên và cùng kiểu CEM, chưa phải held-out evaluation. Payload poisoned hiện tại được tối ưu trước khi biết defense; chưa phải attacker thích nghi. Lượt mới bật refill và prompt spotlighting cùng lúc nên chưa thể tách riêng đóng góp của hai thay đổi này. Các kết quả cũng chưa chứng minh câu trả lời của LLM đúng trong hệ thống production.
+Các kết quả trên cùng dùng 100 query đầu tiên, chưa phải held-out evaluation. Payload poisoned được tạo trước khi biết defense; chưa phải attacker thích nghi. Lượt 5 đã xác nhận rủi ro này: chỉ cần thay CEM bằng văn bản độc trôi chảy (vẫn không biết defense), exposure sau defense tăng từ `2%` lên `79%`. Hiệu quả của Dual-Filter chỉ được chứng minh với CEM. Lượt mới bật refill và prompt spotlighting cùng lúc nên chưa thể tách riêng đóng góp của hai thay đổi này. Các kết quả cũng chưa chứng minh câu trả lời của LLM đúng trong hệ thống production.
