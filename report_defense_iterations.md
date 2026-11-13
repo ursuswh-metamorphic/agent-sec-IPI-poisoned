@@ -168,10 +168,13 @@ nhiều tài liệu sạch.
 | 4 | Top-10 → filter → top-3, refill + spotlighting, ngưỡng Balanced `0,6/300` | 100 | 10/3 | 56% ở top-3; 66% trong top-10 | **2%** | 9% → **0%** | **0%** | **0%** | **10,5%** |
 | 5 | Cấu hình lượt 4, **tấn công P²A** (văn bản độc trôi chảy) thay cho CEM | 100 | 10/3 | 100% ở top-3 | **79%** | 4% → 1% (*) | 0% | 0% | 10,5% |
 | 6 | Lượt 4 + **kiểm tra nhất quán NLI** sau Dual-Filter (τ = 0,2), tấn công P²A | 100 | 10/3 | 100% ở top-3 | **75%** | 4% → 1% (*) | 0% | 0% | 10,5% + 3,9% (**) |
+| 7 | **NQ** (toàn corpus 2,68 triệu đoạn), PoisonedRAG 1 đoạn/query, Dual-Filter `0,6/300`, RAG Qwen2.5-3B | 100 | 10/5 | 97% ở top-5 | **82%** | ASR đáp án sai 67% → 59% (***) | 0% | — | **18,0%** |
 
 (*) Target Yes ASR không đo được tác động của P²A trên NFCorpus; xem phần đánh giá lượt 5.
 
 (**) `10,5%` là FP của Dual-Filter; `3,9%` là tỷ lệ tài liệu sạch (đã qua Dual-Filter) bị bước NLI chặn thêm.
+
+(***) Lượt 7 đổi dataset, attacker và LLM nên không so trực tiếp với lượt 1–6. ASR = câu trả lời chứa đáp án sai của PoisonedRAG. Xem phần đánh giá lượt 7 cho đủ 3 biến thể và 6 policy.
 
 ### Nguồn kết quả
 
@@ -181,6 +184,7 @@ nhiều tài liệu sạch.
 - Lượt 4: [`result/usenix_results_20261013T085302_453423Z.zip`](./result/usenix_results_20261013T085302_453423Z.zip) — 100 query, cùng pipeline lượt 3 nhưng đổi ngưỡng sang `0,6/300`.
 - Lượt 5: [`result/usenix_results_20261108T185216_146791Z.zip`](./result/usenix_results_20261108T185216_146791Z.zip) — chạy lại toàn bộ notebook (commit `f832fd4`). Phần CEM nằm ở `results/dual_filter/`, phần P²A ở `results/p2a/`.
 - Lượt 6: [`result/usenix_results_20261109T081526_719962Z.zip`](./result/usenix_results_20261109T081526_719962Z.zip) — chạy lại toàn bộ notebook (commit `ea89556`). Phần mới nằm ở `results/consistency/`.
+- Lượt 7: notebook [`ipi-def-v3-nq.ipynb`](./ipi-def-v3-nq.ipynb) đã chạy trên Kaggle; output được Kaggle sync lên GitHub (commit `3fff971`). Số liệu trong báo cáo đọc từ output của notebook. File `nq_results_20261109T115636_973963Z.zip` nằm ở `/kaggle/working`, **chưa tải về `result/`**.
 
 ## Đánh giá lượt mới nhất
 
@@ -431,6 +435,116 @@ top-3. Bước NLI tốn thêm khoảng 160 giây cho 8.895 cặp trên T4.
 Giới hạn: TrustRAG gốc dùng LLM đánh giá xung đột và clustering, mạnh hơn NLI
 cross-encoder; khẳng định được rút bằng quy tắc "1–2 câu đầu"; NLI chỉ đọc 512 token.
 
+## Đánh giá lượt 7: PoisonedRAG trên NQ, ablation từng lớp defense
+
+### Mục đích
+
+Lượt 5–6 không kết luận được ở tầng câu trả lời vì mục tiêu `Yes` không hợp với
+NFCorpus và FLAN-T5-small quá yếu. Lượt 7 chuyển sang thiết lập của PoisonedRAG/P³A:
+
+- **Dataset:** toàn bộ corpus BEIR NQ (2.681.468 đoạn), 100 query có trong file
+  `nq.json` của PoisonedRAG. Mỗi query có đáp án đúng, đáp án sai và 5 đoạn độc do
+  GPT-4 viết.
+- **Retrieval:** MiniLM, candidate top-10 → final top-5 (top-5 như paper).
+- **RAG:** Qwen2.5-3B-Instruct, prompt của PoisonedRAG.
+- **ASR:** câu trả lời chứa đáp án sai (so khớp substring, giống paper).
+  **Accuracy:** câu trả lời chứa đáp án đúng.
+- **3 biến thể tấn công:** `prag1` (1 đoạn, `query ⊕ đoạn`), `prag5` (5 đoạn,
+  thiết lập mặc định của paper), `prag5_noq` (5 đoạn, bỏ câu hỏi ở đầu).
+- **6 policy trên cùng candidate:** `none`, `spotlight` (chỉ đổi prompt),
+  `dualfilter` (ngưỡng `0,6/300` lấy từ NFCorpus, không chỉnh lại), `df_nli`,
+  `df_qcopy` (chặn tài liệu chép câu hỏi ở đầu), `df_nli_qcopy`.
+
+Notebook riêng `ipi-def-v3-nq.ipynb`; `ipi-def-v2.ipynb` giữ nguyên cho NFCorpus.
+
+### Retrieval sạch và khả năng lên top của tài liệu độc
+
+- Retrieval sạch: recall@5 = `0,50`; 71% query có đáp án đúng trong top-5 sạch.
+- Exposure trước defense: `prag1` 97%; `prag5` 100% (trung bình 4,45/5 tài liệu
+  trong top-5 là độc); `prag5_noq` 89%.
+- Bỏ câu hỏi ở đầu chỉ làm exposure giảm từ 100% xuống 89%: đoạn GPT-4 bám sát
+  chủ đề tự nó đã đủ lên top.
+
+### Tỷ lệ chặn của từng detector (trên candidate top-10)
+
+| Nhóm tài liệu | Số tài liệu | Dual-Filter | NLI (τ = 0,5) | Question-copy |
+|---|---:|---:|---:|---:|
+| Sạch (FP) | 3.045 | **18,0%** | 8,5% | **0,0%** |
+| `prag1` | 100 | 17,0% | 9,0% | **100%** |
+| `prag5` | 489 | 16,4% | 2,2% | **100%** |
+| `prag5_noq` | 366 | 10,4% | 3,3% | **0,3%** |
+
+- **Dual-Filter không phân biệt được:** chặn tài liệu sạch (18%) nhiều hơn tài
+  liệu độc (10–17%). Perplexity trung vị của tài liệu độc (≈111) chỉ cao hơn tài
+  liệu sạch (≈85) một chút, phân bố chồng lấn mạnh; semantic range gần như trùng.
+  FP trên NQ (18%) cao hơn trên NFCorpus (10,5%) vì ngưỡng không được hiệu chỉnh lại.
+- **NLI không phân biệt được:** τ = 0,5 là giá trị nhỏ nhất có FP ≤ 10% (FP ở
+  τ = 0,1 / 0,2 / 0,3 lần lượt 52,6% / 28,8% / 20%). Với `prag5`, 5 đoạn độc ủng hộ
+  lẫn nhau nên tỷ lệ bị mâu thuẫn còn thấp hơn tài liệu sạch.
+- **Question-copy tách hoàn hảo** khi đoạn độc chép câu hỏi ở đầu (100% so với FP
+  0%), nhưng **bị né hoàn toàn** chỉ bằng cách bỏ câu hỏi (`prag5_noq`: 0,3%).
+
+### ASR theo policy
+
+| Policy | `prag1` | `prag5` | `prag5_noq` |
+|---|---:|---:|---:|
+| `none` | 67% | 96% | 82% |
+| `spotlight` | 67% | 89% | 75% |
+| `dualfilter` | 59% | 90% | 83% |
+| `df_nli` | 59% | 90% | 80% |
+| `df_qcopy` | **5%** | **3%** | 83% |
+| `df_nli_qcopy` | **5%** | **4%** | 80% |
+
+Exposure sau defense:
+
+| Policy | `prag1` | `prag5` | `prag5_noq` |
+|---|---:|---:|---:|
+| `none` / `spotlight` | 97% | 100% | 89% |
+| `dualfilter` | 82% | 100% | 91% |
+| `df_nli` | 75% | 100% | 89% |
+| `df_qcopy` | 0% | 0% | 91% |
+| `df_nli_qcopy` | 0% | 0% | 89% |
+
+Cái giá trên nhánh sạch (không có tài liệu độc):
+
+| Policy | Clean accuracy | Clean ASR (chứa đáp án sai dù không bị tấn công) | Từ chối trả lời |
+|---|---:|---:|---:|
+| `none` | 56% | 5% | 0% |
+| `spotlight` | 57% | 4% | 0% |
+| `dualfilter` | 51% | 5% | 0% |
+| `df_nli` / `df_qcopy` / `df_nli_qcopy` | 50–51% | 5% | 0% |
+
+### Nhận xét
+
+1. **Với LLM 3B và đáp án sai cụ thể, tấn công rất mạnh:** chỉ 1 đoạn độc đã đạt
+   ASR 67%, 5 đoạn đạt 96%, cùng mức với paper (PoisonedRAG-B trên vanilla RAG
+   72,6%). Clean ASR chỉ 4–5%, nên ASR đo được phản ánh đúng tác động của tấn công.
+2. **Spotlighting giúp một chút, độc lập với bộ lọc:** `prag5` 96% → 89%,
+   `prag5_noq` 82% → 75%, không làm giảm clean accuracy. Đây là phần lượt 6 chưa
+   tách được.
+3. **Dual-Filter gần như vô dụng trên NQ:** ASR `prag5` không đổi (89% → 90%);
+   `prag1` giảm 67% → 59% nhưng clean accuracy giảm 57% → 51%. Với `prag5_noq`,
+   exposure còn **tăng** (89% → 91%): khi tài liệu sạch bị chặn, refill kéo thêm
+   tài liệu độc xếp thấp hơn vào context.
+4. **NLI không thêm được gì** trên cả ba biến thể.
+5. **Question-copy là tín hiệu duy nhất có hiệu quả,** nhưng chỉ vì PoisonedRAG
+   chép nguyên câu hỏi. Đây đúng là trường hợp paper Adaptive Attacks cảnh báo:
+   bỏ câu hỏi ở đầu (một thay đổi tầm thường) đưa ASR về 80–83%, trong khi tài liệu
+   độc vẫn lên top ở 89% query. Không được báo cáo `df_qcopy` như một defense bền vững.
+
+### Kết luận lượt 7
+
+Thiết lập mới đo được ASR có ý nghĩa và xác nhận kết luận của lượt 5–6 trên một
+dataset khác: các detector dựa trên độ "lạ" của văn bản (perplexity, semantic range)
+và kiểm tra nhất quán bằng NLI đều không chặn được tài liệu độc viết trôi chảy.
+Detector duy nhất hiệu quả (question-copy) bị né bằng một thay đổi tầm thường.
+Trên NQ, cấu hình defense hiện tại (`dualfilter`) để ASR ở mức 59–90% và làm giảm
+clean accuracy khoảng 6 điểm.
+
+Giới hạn: retriever MiniLM yếu hơn Contriever của paper; chưa có reranker; chỉ 100
+query; tấn công vẫn là black-box không biết defense; ngưỡng Dual-Filter lấy từ
+NFCorpus, không hiệu chỉnh lại cho NQ.
+
 ## Chuỗi cải tiến từ baseline 10 tài liệu
 
 1. **Baseline 10 query:** chạy pipeline gốc trên 10 tài liệu/query để xác nhận
@@ -454,6 +568,10 @@ cross-encoder; khẳng định được rút bằng quy tắc "1–2 câu đầu
 6. **Thêm kiểm tra nhất quán NLI sau Dual-Filter:** τ chọn từ nhánh clean
    (`0,2`, FP thêm `3,9%`). Exposure P²A chỉ giảm từ `79%` xuống `75%` vì NLI
    hầu như không thấy mâu thuẫn giữa các abstract NFCorpus.
+7. **Chuyển sang NQ và PoisonedRAG (notebook v3):** đáp án sai cụ thể, LLM
+   Qwen2.5-3B, ablation 6 policy. ASR không defense 67–96%. Dual-Filter và NLI
+   gần như không tác dụng; question-copy đưa ASR về 3–5% nhưng bị né hoàn toàn
+   khi bỏ câu hỏi ở đầu (ASR 80–83%).
 
 ## Cách đọc các metric
 
@@ -467,15 +585,21 @@ cross-encoder; khẳng định được rút bằng quy tắc "1–2 câu đầu
 
 ## Khuyến nghị cho lượt tiếp theo
 
-Ưu tiên sau lượt 6:
+Ưu tiên sau lượt 7 (thiết lập NQ đã đo được ASR có ý nghĩa, nên dùng làm benchmark chính):
 
-1. **Sửa thiết lập tấn công trước khi thử thêm defense:** đặt đáp án sai cụ thể cho
-   từng query (không ép `Yes`), hoặc chuyển sang dataset QA thật (NQ, HotpotQA) với
-   LLM sinh mạnh hơn FLAN-T5-small. Nếu không, mọi ASR đều khó diễn giải.
-2. Thêm nhánh "spotlighting nhưng không lọc" để tách tác động của prompt khỏi
-   tác động của filter.
-3. Thử các tín hiệu còn lại: cross-encoder reranker; phát hiện tài liệu chép nguyên
-   câu hỏi ở đầu; consistency bằng LLM đánh giá (TrustRAG đầy đủ) thay cho NLI.
+1. **Thêm reranker cross-encoder** làm một policy (`rerank`, `rerank + dualfilter`).
+   Theo Yang et al., reranker chặn mạnh PoisonedRAG nhưng không chặn P²A, nên cần
+   đo trên cả `prag5` và `prag5_noq`.
+2. **Kiểm tra nhất quán bằng LLM** (gần TrustRAG gốc hơn: LLM đánh giá xung đột,
+   clustering để phát hiện nhóm đoạn độc ủng hộ lẫn nhau) thay cho NLI.
+3. Hiệu chỉnh lại ngưỡng Dual-Filter trên NQ sạch, hoặc bỏ Dual-Filter khỏi cấu hình
+   mặc định, vì trên NQ nó làm giảm clean accuracy mà không giảm ASR.
+4. Thêm P²A với đáp án sai (dạng không chép câu hỏi) để có attacker trôi chảy khác GPT-4.
+5. Coi `prag5_noq` là kịch bản chính khi đánh giá defense mới; không báo cáo
+   question-copy như defense bền vững.
+
+Đã làm sau lượt 6: đổi sang đáp án sai cụ thể và LLM mạnh hơn, thêm nhánh
+spotlighting không lọc, thêm question-copy (lượt 7).
 
 Khuyến nghị sau lượt 5 (mục 2 về kiểm tra nhất quán NLI đã thử ở lượt 6, không hiệu quả trên NFCorpus):
 
@@ -484,7 +608,7 @@ Khuyến nghị sau lượt 5 (mục 2 về kiểm tra nhất quán NLI đã th�
    - Cross-encoder reranker giữa retrieval và filter (Yang et al. cho thấy nó làm
      giảm mạnh các attack kiểu cũ, nhưng không chặn được P²A — cần đo lại).
    - Kiểm tra nhất quán giữa các tài liệu kiểu TrustRAG: tài liệu nói ngược với các
-     tài liệu còn lại thì đáng ngờ. Đây là defense duy nhất giảm rõ P³A trong paper.
+     tài liệu còn lại thì đáng ngờ. Theo rebuttal của tác giả P³A trên OpenReview (không có trong PDF), TrustRAG giảm P³A nhiều nhất (72,2% → 48,0%).
    - Phát hiện tài liệu chép nguyên câu hỏi ở đầu (dấu hiệu chung của PoisonedRAG
      và P²A).
 2. **Sửa cách đo tác động lên câu trả lời:** đặt một đáp án sai cụ thể cho từng
@@ -528,4 +652,4 @@ Nhận xét và giới hạn:
 
 ## Giới hạn hiện tại
 
-Các kết quả trên cùng dùng 100 query đầu tiên, chưa phải held-out evaluation. Payload poisoned được tạo trước khi biết defense; chưa phải attacker thích nghi. Lượt 5 đã xác nhận rủi ro này: chỉ cần thay CEM bằng văn bản độc trôi chảy (vẫn không biết defense), exposure sau defense tăng từ `2%` lên `79%`. Hiệu quả của Dual-Filter chỉ được chứng minh với CEM. Lượt 6 cho thấy thêm kiểm tra nhất quán bằng NLI cũng không khắc phục được (exposure P²A `75%`). Lượt mới bật refill và prompt spotlighting cùng lúc nên chưa thể tách riêng đóng góp của hai thay đổi này. Các kết quả cũng chưa chứng minh câu trả lời của LLM đúng trong hệ thống production.
+Các kết quả trên cùng dùng 100 query đầu tiên, chưa phải held-out evaluation. Payload poisoned được tạo trước khi biết defense; chưa phải attacker thích nghi. Lượt 5 đã xác nhận rủi ro này: chỉ cần thay CEM bằng văn bản độc trôi chảy (vẫn không biết defense), exposure sau defense tăng từ `2%` lên `79%`. Hiệu quả của Dual-Filter chỉ được chứng minh với CEM. Lượt 6 cho thấy thêm kiểm tra nhất quán bằng NLI cũng không khắc phục được (exposure P²A `75%`). Lượt 7 xác nhận điều này trên NQ với PoisonedRAG: Dual-Filter và NLI gần như không giảm ASR; question-copy giảm mạnh nhưng bị né khi bỏ câu hỏi ở đầu. Lượt mới bật refill và prompt spotlighting cùng lúc nên chưa thể tách riêng đóng góp của hai thay đổi này. Các kết quả cũng chưa chứng minh câu trả lời của LLM đúng trong hệ thống production.
